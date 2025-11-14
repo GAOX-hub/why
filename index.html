@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>密码子的特点·教学板书</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f6fb;
+      color: #0f172a;
+    }
+    .page {
+      max-width: 1200px;
+      margin: 30px auto 50px;
+      padding: 0 20px;
+    }
+    h1.title {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 24px;
+      color: #0f172a;
+    }
+
+    /* 上方小卡片：标题 + 概述 */
+    .top-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .top-card {
+      background: #3369c8;
+      color: #ffffff;
+      border-radius: 4px;
+      padding: 10px 12px;
+      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25);
+      font-size: 13px;
+    }
+    .top-card h2 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .top-card p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* 下方大卡片：具体表现 + 生物学意义 */
+    .bottom-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .bottom-card {
+      background: #2853a6;
+      color: #ffffff;
+      border-radius: 4px;
+      padding: 12px 14px;
+      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .bottom-card h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .bottom-card p {
+      margin: 0 0 6px;
+    }
+    .bottom-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 标签小标题 “具体表现 / 生物学意义 / 规律 / 其它情况 / 关键术语” */
+    .label {
+      font-weight: 700;
+      margin-right: 3px;
+    }
+
+    /* 响应式：屏幕窄时自动排成多行 */
+    @media (max-width: 1100px) {
+      .top-row, .bottom-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 760px) {
+      .top-row, .bottom-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 520px) {
+      .top-row, .bottom-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 class="title">密码子的特点</h1>
+
+    <!-- 顶部：5 个小卡片，总览 -->
+    <div class="top-row">
+      <div class="top-card">
+        <h2>1. 方向性</h2>
+        <p>mRNA 分子中遗传密码的阅读方向是固定的，从 5′ 端到 3′ 端。</p>
+      </div>
+      <div class="top-card">
+        <h2>2. 连续性</h2>
+        <p>位于起始密码子和终止密码子之间的编码序列是连续不断的，密码子之间没有间隔或分叉。</p>
+      </div>
+      <div class="top-card">
+        <h2>3. 简并性</h2>
+        <p>多数氨基酸可以由多个不同的密码子编码，存在“多对一”的对应关系。</p>
+      </div>
+      <div class="top-card">
+        <h2>4. 通用性</h2>
+        <p>绝大多数生物共用同一套遗传密码，是基因工程得以实现的重要基础。</p>
+      </div>
+      <div class="top-card">
+        <h2>5. 摇动性</h2>
+        <p>密码子第三位碱基与 tRNA 反密码子第一位碱基的配对规则相对灵活，允许一定程度的非标准配对。</p>
+      </div>
+    </div>
+
+    <!-- 底部：5 个大卡片，详细讲解 -->
+    <div class="bottom-row">
+      <!-- 1 方向性 -->
+      <div class="bottom-card">
+        <h3>1. 方向性</h3>
+        <p><span class="label">具体表现：</span>起始密码子位于 mRNA 开放阅读框的 5′ 末端，终止密码子位于 mRNA 的 3′ 末端。</p>
+        <p><span class="label">生物学意义：</span>方向性决定了蛋白质合成的方向是从 N 末端（氨基端）到 C 末端（羧基端）。</p>
+      </div>
+
+      <!-- 2 连续性 -->
+      <div class="bottom-card">
+        <h3>2. 连续性</h3>
+        <p><span class="label">具体表现：</span>三联体密码子一个接一个地连续排列，中间没有标点和间隔。</p>
+        <p><span class="label">生物学意义：</span>保证了遗传信息被准确读取。一旦发生非 3 的倍数的碱基插入或缺失，就会破坏这种连续性，导致移码突变，使突变点下游的氨基酸序列全部发生错误。</p>
+      </div>
+
+      <!-- 3 简并性 -->
+      <div class="bottom-card">
+        <h3>3. 简并性</h3>
+        <p><span class="label">具体表现：</span>61 个有意义密码子编码 20 种氨基酸。除甲硫氨酸（AUG）和色氨酸（UGG）仅有一个密码子外，其余 18 种氨基酸都有 2 个或以上的密码子。</p>
+        <p>编码同一种氨基酸的不同密码子称为<strong>同义密码子</strong>。</p>
+        <p><span class="label">规律：</span>同义密码子的前两位碱基通常相同，差异主要在第三位碱基。这表明密码子的性质主要由前两位碱基决定。</p>
+      </div>
+
+      <!-- 4 通用性 -->
+      <div class="bottom-card">
+        <h3>4. 通用性</h3>
+        <p><span class="label">生物学意义：</span>这是基因工程的理论基础，使得一种生物（如细菌）能够表达另一种生物（如人类）的基因并产生有功能的蛋白质。</p>
+        <p><span class="label">其它情况：</span>存在少数例外，如线粒体或某些单细胞生物的遗传密码与标准密码表略有差异。</p>
+      </div>
+
+      <!-- 5 摇动性 -->
+      <div class="bottom-card">
+        <h3>5. 摇动性</h3>
+        <p><span class="label">具体表现：</span>一种 tRNA 上的反密码子可以通过“摆动”识别多个第三位碱基不同但编码同一种氨基酸的密码子。</p>
+        <p><span class="label">生物学意义：</span>解释了为什么第三位碱基发生改变时，往往仍能编码相同的氨基酸；同时减少了细胞内 tRNA 种类数量的需要（无需每个密码子都对应一种独特的 tRNA）。</p>
+        <p><span class="label">关键术语：</span>发生这种非标准配对的第三位碱基被称为<strong>摇动位点</strong>（wobble position）。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
