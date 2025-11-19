@@ -242,6 +242,20 @@
     @media (max-width: 720px) {
       .result-main { flex-direction: column; }
     }
+
+    /* —— 高亮浅蓝色 pill（用于密码子、氨基酸等） —— */
+    .accent {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 16px;            /* 比正文略大一点 */
+      font-weight: 700;
+      line-height: 1;
+      color: #043a6b;
+      background: linear-gradient(90deg, #e8fbff 0%, #d1f4ff 100%);
+      border: 1px solid rgba(3, 102, 153, 0.12);
+      box-shadow: 0 3px 8px rgba(3, 102, 153, 0.06);
+    }
   </style>
 </head>
 <body>
@@ -445,31 +459,45 @@
       const anticodon = codon.split("").map(complementRNA).reverse().join("");
       const dnaTemplate = rnaToDnaTemplate(codon);
 
-      // 上半部分：关键信息
+      /* 上半部分：关键信息，用浅蓝 accent 高亮 */
       resultMain.innerHTML = `
         <div class="result-main-block">
           <div class="key-row">
             <span class="key-label">mRNA 密码子 (5′→3′)：</span>
-            <span class="key-value"><code>${codon}</code></span>
+            <span class="key-value">
+              <span class="accent">
+                <code style="background:transparent;border:none;padding:0;margin:0;">${codon}</code>
+              </span>
+            </span>
           </div>
           <div class="key-row">
             <span class="key-label">氨基酸：</span>
-            <span class="key-value">${info.name} (${aaCode})</span>
+            <span class="key-value">
+              <span class="accent">${info.name} (${aaCode})</span>
+            </span>
           </div>
         </div>
         <div class="result-main-block">
           <div class="key-row">
             <span class="key-label">tRNA 反密码子 (3′→5′)：</span>
-            <span class="key-value"><code>${anticodon}</code></span>
+            <span class="key-value">
+              <span class="accent">
+                <code style="background:transparent;border:none;padding:0;margin:0;">${anticodon}</code>
+              </span>
+            </span>
           </div>
           <div class="key-row">
             <span class="key-label">DNA 模板链 (3′→5′)：</span>
-            <span class="key-value"><code>${dnaTemplate}</code></span>
+            <span class="key-value">
+              <span class="accent">
+                <code style="background:transparent;border:none;padding:0;margin:0;">${dnaTemplate}</code>
+              </span>
+            </span>
           </div>
         </div>
       `;
 
-      // 下半部分：简并性 + 备注
+      /* 下半部分：简并性 + 备注 */
       let degText;
       if (aaCode === "Stop") {
         degText = `共有 <strong>${degeneracy}</strong> 个终止密码子。`;
