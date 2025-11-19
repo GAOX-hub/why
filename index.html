@@ -8,54 +8,62 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-      background: radial-gradient(circle at top, #d9f7f2 0, #ecfbff 40%, #f7fbff 100%);
+      background: #e3f1ff; /* 整体浅蓝背景 */
       color: #111827;
     }
-    .page-wrap {
-      max-width: 1100px;
+
+    .page-outer {
+      max-width: 1200px;
       margin: 24px auto 40px;
-      padding: 0 20px 40px;
+      padding: 0 20px;
+    }
+
+    /* 中间大面板 */
+    .page-wrap {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+      padding: 20px 24px 28px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     header h1 {
-      margin: 0 0 6px;
-      font-size: 30px;
+      margin: 0 0 4px;
+      font-size: 32px;
       font-weight: 800;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: #064e3b;
     }
     header p {
       margin: 0;
-      font-size: 14px;
+      font-size: 15px;
       color: #4b5563;
     }
 
     .layout {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
     }
 
     .card {
-      flex: 1 1 320px;
-      background: #ffffff;
+      background: #f9fefe;
       border-radius: 20px;
       border: 1px solid #e0f2f1;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-      padding: 16px 18px 18px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      padding: 14px 18px 16px;
     }
     .card h2 {
       margin: 0 0 6px;
-      font-size: 18px;
+      font-size: 20px;
       color: #064e3b;
     }
     .hint {
-      font-size: 13px;
+      font-size: 14px;
       color: #64748b;
       margin-bottom: 10px;
       line-height: 1.5;
@@ -69,13 +77,13 @@
       margin-bottom: 10px;
     }
     .base-btn {
-      min-width: 44px;
+      min-width: 46px;
       padding: 7px 12px;
       border-radius: 999px;
       border: none;
       background: #14b8a6;
       color: #ffffff;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
       box-shadow: 0 4px 10px rgba(20, 184, 166, 0.35);
@@ -91,19 +99,19 @@
       margin-bottom: 8px;
     }
     .codon-slot {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 12px;
       border: 2px solid #a7f3d0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       background: rgba(240, 253, 250, 0.9);
       box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.2);
     }
     .codon-label {
-      font-size: 13px;
+      font-size: 14px;
       color: #64748b;
     }
     .builder-actions {
@@ -114,7 +122,7 @@
     }
     .small-btn {
       padding: 5px 12px;
-      font-size: 12px;
+      font-size: 13px;
       border-radius: 999px;
       border: 1px solid #cbd5e1;
       background: #f8fafc;
@@ -139,15 +147,15 @@
       border-radius: 999px;
       border: 1px solid #cbd5e1;
       background: #ffffff;
-      width: 130px;
+      width: 150px;
       text-transform: uppercase;
     }
     #codon-input::placeholder {
       color: #9ca3af;
     }
     #search-btn {
-      padding: 6px 16px;
-      font-size: 14px;
+      padding: 6px 18px;
+      font-size: 15px;
       border-radius: 999px;
       border: none;
       background: #14b8a6;
@@ -161,7 +169,7 @@
       transform: translateY(-1px);
     }
     .search-hint {
-      font-size: 12px;
+      font-size: 13px;
       color: #6b7280;
       line-height: 1.4;
     }
@@ -171,18 +179,19 @@
       color: #b91c1c;
     }
 
-    /* 结果区 */
+    /* 结果区：占据整行 */
     .result-card {
-      margin-top: 12px;
-      background: #ffffff;
+      margin-top: 8px;
+      background: #f9fefe;
       border-radius: 20px;
       border: 1px solid #e0f2f1;
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
-      padding: 16px 18px 14px;
+      padding: 14px 18px 16px;
+      min-height: 260px; /* 留出一个大展示区 */
     }
     .result-title {
       margin: 0 0 10px;
-      font-size: 18px;
+      font-size: 20px;
       color: #064e3b;
       font-weight: 700;
     }
@@ -190,15 +199,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 6px;
-      font-size: 14px;
+      margin-bottom: 10px;
+      font-size: 15px;
     }
     .result-main-block {
       flex: 1 1 260px;
     }
     .key-row {
       margin-bottom: 6px;
-      font-size: 15px;
+      font-size: 16px;
     }
     .key-label {
       font-weight: 700;
@@ -214,7 +223,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
-      font-size: 13px;
+      font-size: 14px;
     }
     .chip {
       padding: 2px 8px;
@@ -223,7 +232,7 @@
       border: 1px solid #bae6fd;
     }
     .detail {
-      font-size: 13px;
+      font-size: 14px;
       color: #4b5563;
       line-height: 1.6;
       margin-top: 4px;
@@ -239,16 +248,18 @@
       font-size: 90%;
     }
 
-    @media (max-width: 720px) {
-      .result-main { flex-direction: column; }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* —— 高亮浅蓝色 pill（用于密码子、氨基酸等） —— */
+    /* —— 高亮浅蓝色 pill —— */
     .accent {
       display: inline-block;
       padding: 4px 10px;
       border-radius: 8px;
-      font-size: 16px;            /* 比正文略大一点 */
+      font-size: 17px;
       font-weight: 700;
       line-height: 1;
       color: #043a6b;
@@ -259,69 +270,69 @@
   </style>
 </head>
 <body>
-  <div class="page-wrap">
-    <header>
-      <h1>遗传密码子交互实验台</h1>
-      <p>拼装或输入密码子，快速查看对应氨基酸、反密码子和简并性</p>
-    </header>
+  <div class="page-outer">
+    <div class="page-wrap">
+      <header>
+        <h1>遗传密码子交互实验台</h1>
+        <p>拼装或输入密码子，快速查看对应氨基酸、反密码子和简并性</p>
+      </header>
 
-    <!-- 上方：拼装 + 检索 -->
-    <div class="layout">
-      <!-- 左：拼装 -->
-      <section class="card">
-        <h2>① 拼装密码子</h2>
-        <div class="hint">
-          依次点击 A / U / G / C 组合出一个 mRNA 三联体密码子（5′→3′）。
-        </div>
+      <!-- 上方：两列布局 -->
+      <div class="layout">
+        <!-- 左：拼装 -->
+        <section class="card">
+          <h2>① 拼装密码子</h2>
+          <div class="hint">
+            依次点击 A / U / G / C 组合出一个 mRNA 三联体密码子（5′→3′）。
+          </div>
 
-        <div class="bases">
-          <button class="base-btn" data-base="A">A</button>
-          <button class="base-btn" data-base="U">U</button>
-          <button class="base-btn" data-base="G">G</button>
-          <button class="base-btn" data-base="C">C</button>
-        </div>
+          <div class="bases">
+            <button class="base-btn" data-base="A">A</button>
+            <button class="base-btn" data-base="U">U</button>
+            <button class="base-btn" data-base="G">G</button>
+            <button class="base-btn" data-base="C">C</button>
+          </div>
 
-        <div class="codon-display">
-          <div class="codon-slot" id="slot-0">_</div>
-          <div class="codon-slot" id="slot-1">_</div>
-          <div class="codon-slot" id="slot-2">_</div>
-          <div class="codon-label">mRNA 5′ → 3′</div>
-        </div>
+          <div class="codon-display">
+            <div class="codon-slot" id="slot-0">_</div>
+            <div class="codon-slot" id="slot-1">_</div>
+            <div class="codon-slot" id="slot-2">_</div>
+            <div class="codon-label">mRNA 5′ → 3′</div>
+          </div>
 
-        <div class="builder-actions">
-          <button class="small-btn" id="btn-backspace">删掉最后一位</button>
-          <button class="small-btn" id="btn-clear">清空密码子</button>
-        </div>
-      </section>
+          <div class="builder-actions">
+            <button class="small-btn" id="btn-backspace">删掉最后一位</button>
+            <button class="small-btn" id="btn-clear">清空密码子</button>
+          </div>
+        </section>
 
-      <!-- 右：检索 -->
-      <section class="card">
-        <h2>② 直接输入密码子</h2>
-        <div class="hint">
-          输入任意一个三联体密码子（可输入 RNA 或含 T 的 DNA 密码子），点击“查询”。
-        </div>
+        <!-- 右：检索 -->
+        <section class="card">
+          <h2>② 直接输入密码子</h2>
+          <div class="hint">
+            输入任意一个三联体密码子（可输入 RNA 或含 T 的 DNA 密码子），点击“查询”。
+          </div>
 
-        <div class="search-row">
-          <input id="codon-input" type="text" maxlength="3" placeholder="例如 AUG" />
-          <button id="search-btn">查询</button>
-        </div>
-        <div class="search-hint">
-          · RNA：使用 A / U / C / G<br/>
-          · DNA：若含 T，将自动按 U 处理（如 <code>ATG</code> → <code>AUG</code>）
-        </div>
+          <div class="search-row">
+            <input id="codon-input" type="text" maxlength="3" placeholder="例如 AUG" />
+            <button id="search-btn">查询</button>
+          </div>
+          <div class="search-hint">
+            · RNA：使用 A / U / C / G<br/>
+            · DNA：若含 T，将自动按 U 处理（如 <code>ATG</code> → <code>AUG</code>）
+          </div>
 
-        <div id="error-msg" class="error"></div>
+          <div id="error-msg" class="error"></div>
+        </section>
+      </div>
+
+      <!-- 下方：查询结果（整行） -->
+      <section id="result-card" class="result-card" style="display:none;">
+        <h2 class="result-title">查询结果</h2>
+        <div class="result-main" id="result-main"></div>
+        <div class="detail" id="result-detail"></div>
       </section>
     </div>
-
-    <!-- 下方：查询结果 -->
-    <section id="result-card" class="result-card" style="display:none;">
-      <h2 class="result-title">查询结果</h2>
-
-      <div class="result-main" id="result-main"></div>
-
-      <div class="detail" id="result-detail"></div>
-    </section>
   </div>
 
   <script>
@@ -421,7 +432,6 @@
         .sort();
     }
 
-    /* ====== DOM 引用 ====== */
     const slots = [
       document.getElementById("slot-0"),
       document.getElementById("slot-1"),
@@ -459,7 +469,6 @@
       const anticodon = codon.split("").map(complementRNA).reverse().join("");
       const dnaTemplate = rnaToDnaTemplate(codon);
 
-      /* 上半部分：关键信息，用浅蓝 accent 高亮 */
       resultMain.innerHTML = `
         <div class="result-main-block">
           <div class="key-row">
@@ -497,14 +506,12 @@
         </div>
       `;
 
-      /* 下半部分：简并性 + 备注 */
       let degText;
       if (aaCode === "Stop") {
         degText = `共有 <strong>${degeneracy}</strong> 个终止密码子。`;
       } else {
         degText = `这种氨基酸共有 <strong>${degeneracy}</strong> 个不同密码子编码，本密码子是其中之一。`;
       }
-
       const noteText = info.note ? `；<strong>特别提示：</strong>${info.note}` : "";
 
       resultDetail.innerHTML = `
@@ -521,7 +528,6 @@
       resultCard.style.display = "block";
     }
 
-    /* ====== 拼装按钮 ====== */
     document.querySelectorAll(".base-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         if (currentCodon.length >= 3) return;
@@ -548,7 +554,6 @@
       resultCard.style.display = "none";
     });
 
-    /* ====== 输入查询 ====== */
     function handleSearch() {
       const norm = normalizeCodon(codonInput.value);
       if (!norm.ok) {
