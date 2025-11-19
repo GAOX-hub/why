@@ -22,7 +22,7 @@
       margin-bottom: 24px;
     }
     header h1 {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       font-size: 30px;
       font-weight: 800;
       letter-spacing: 0.05em;
@@ -38,18 +38,19 @@
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
+
     .card {
       flex: 1 1 320px;
       background: #ffffff;
       border-radius: 20px;
       border: 1px solid #e0f2f1;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
       padding: 16px 18px 18px;
     }
     .card h2 {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       font-size: 18px;
       color: #064e3b;
     }
@@ -170,37 +171,65 @@
       color: #b91c1c;
     }
 
-    /* 结果卡片 */
+    /* 结果区 */
     .result-card {
-      margin-top: 20px;
+      margin-top: 12px;
       background: #ffffff;
       border-radius: 20px;
       border: 1px solid #e0f2f1;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
       padding: 16px 18px 14px;
     }
-    .result-header {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: #6b7280;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+    .result-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #064e3b;
+      font-weight: 700;
     }
-    .result-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
-      gap: 8px 20px;
+    .result-main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 6px;
       font-size: 14px;
     }
-    .label {
-      font-weight: 600;
-      margin-right: 4px;
-      color: #111827;
+    .result-main-block {
+      flex: 1 1 260px;
     }
-    .muted {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #64748b;
+    .key-row {
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .key-label {
+      font-weight: 700;
+      color: #111827;
+      margin-right: 4px;
+    }
+    .key-value {
+      font-weight: 600;
+      color: #047857;
+    }
+    .chip-row {
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 13px;
+    }
+    .chip {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ecfeff;
+      border: 1px solid #bae6fd;
+    }
+    .detail {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+    .detail strong {
+      color: #111827;
     }
     code {
       background: #f1f5f9;
@@ -211,349 +240,7 @@
     }
 
     @media (max-width: 720px) {
-      .result-grid { grid-template-columns: minmax(0,1fr); }
-    }
-
-    /* ========= 翻译过程动态示意（放在结果上方） ========= */
-    .diagram-card {
-      background: #ffffff;
-      border-radius: 20px;
-      border: 1px solid #e0f2f1;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
-      padding: 16px 18px 20px;
-      margin-top: 10px;
-    }
-    .diagram-title {
-      margin: 0 0 6px;
-      font-size: 18px;
-      color: #064e3b;
-    }
-    .diagram-hint {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
-
-    .diagram-wrap {
-      margin-top: 4px;
-      display: flex;
-      justify-content: center;
-    }
-    .diagram-inner {
-      width: 620px;
-      max-width: 100%;
-      position: relative;
-      padding: 8px 8px 0;
-    }
-
-    /* 上方肽链波浪 */
-    .peptide-bar {
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 4px;
-    }
-    .peptide-track {
-      display: flex;
-      gap: 8px;
-    }
-    .peptide-bead {
-      border-radius: 50%;
-      background: #e2e8f0;
-      border: 1px solid #cbd5e1;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-    .peptide-bead:nth-child(1) { width: 12px; height: 12px; transform: translateY(4px); }
-    .peptide-bead:nth-child(2) { width: 14px; height: 14px; transform: translateY(-3px); }
-    .peptide-bead:nth-child(3) { width: 16px; height: 16px; transform: translateY(5px); }
-    .peptide-bead:nth-child(4) { width: 14px; height: 14px; transform: translateY(-2px); }
-    .peptide-bead:nth-child(5) { width: 18px; height: 18px; transform: translateY(3px); }
-    .peptide-bead:nth-child(6) { width: 16px; height: 16px; transform: translateY(-4px); }
-    .peptide-bead:nth-child(7) { width: 20px; height: 20px; transform: translateY(2px); }
-
-    .peptide-label {
-      position: absolute;
-      top: 4px;
-      left: 8px;
-      font-size: 12px;
-      color: #6b7280;
-    }
-
-    /* mRNA 区域 */
-    .mrna-box {
-      margin-top: 6px;
-      background: #ecfeff;
-      border-radius: 16px;
-      padding: 18px 18px 20px;
-      border: 1px solid #bae6fd;
-      position: relative;
-      overflow: hidden;
-    }
-    .mrna-caption {
-      font-size: 14px;
-      color: #0f766e;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-    .mrna-track {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .mrna-label {
-      font-size: 16px;
-      font-weight: 600;
-      color: #0f172a;
-      margin-right: 4px;
-    }
-    .mrna-slot-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-    }
-    .mrna-slot {
-      min-width: 54px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: #ccfbf1;
-      font-size: 14px;
-      color: #0f172a;
-      text-align: center;
-    }
-    .mrna-slot.active {
-      background: #f97316;
-      color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.45);
-    }
-
-    /* 中央发光密码子（动画区域） */
-    .mrna-active-area {
-      margin-top: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-    .active-frame {
-      display: flex;
-      gap: 4px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(240, 249, 255, 0.9);
-      box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.45), 0 0 12px rgba(34, 197, 94, 0.35);
-      border: 1px solid #a7f3d0;
-    }
-    .active-cell {
-      width: 26px;
-      height: 32px;
-      border-radius: 6px;
-      border: 2px solid rgba(45, 212, 191, 0.4);
-      background: rgba(255, 255, 255, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 600;
-      color: #0f172a;
-      box-shadow: 0 0 8px rgba(45, 212, 191, 0.3) inset;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-    .active-empty .active-cell {
-      background: rgba(255, 255, 255, 0.7);
-      color: #cbd5e1;
-      border-color: rgba(148, 163, 184, 0.6);
-      box-shadow: none;
-    }
-
-    .mrna-step-label {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #6b7280;
-      text-align: center;
-    }
-
-    /* tRNA 动画对象 */
-    .trna-wrapper {
-      position: absolute;
-      right: 32px;
-      top: 26px;
-      width: 150px;
-      height: 150px;
-      pointer-events: none;
-      opacity: 0;
-      transform: translate(90px, -60px);
-      transition: transform 0.45s ease-out, opacity 0.25s ease-out;
-    }
-    .trna-wrapper.active {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
-
-    .trna-body {
-      position: absolute;
-      inset: 0;
-      margin: auto;
-    }
-    .trna-main-circle {
-      position: absolute;
-      top: 52px;
-      left: 49px;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      border: 5px solid #38bdf8;
-    }
-    .trna-loop-left,
-    .trna-loop-right {
-      position: absolute;
-      top: 60px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 5px solid #38bdf8;
-    }
-    .trna-loop-left { left: 10px; }
-    .trna-loop-right { right: 10px; }
-    .trna-loop-bottom {
-      position: absolute;
-      bottom: 12px;
-      left: 54px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 5px solid #38bdf8;
-    }
-    .trna-small-loop {
-      position: absolute;
-      top: 90px;
-      left: 96px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 5px solid #38bdf8;
-    }
-    .trna-stem-top {
-      position: absolute;
-      top: 2px;
-      left: 73px;
-      width: 6px;
-      height: 50px;
-      background: #38bdf8;
-      border-radius: 999px;
-    }
-    .trna-stem-bottom {
-      position: absolute;
-      top: 88px;
-      left: 86px;
-      width: 6px;
-      height: 34px;
-      background: #38bdf8;
-      border-radius: 999px;
-    }
-
-    /* 顶端 A-OH 氨基酸球 */
-    .aa-circle {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 2px solid #22c55e;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
-    }
-    .aa-name {
-      margin-top: 2px;
-      font-size: 10px;
-    }
-    .aa-pop {
-      animation: aa-pop 0.35s ease-out;
-    }
-    @keyframes aa-pop {
-      0% { transform: translateX(-50%) scale(0.85); opacity: 0.6; }
-      70% { transform: translateX(-50%) scale(1.05); opacity: 1; }
-      100% { transform: translateX(-50%) scale(1); opacity: 1; }
-    }
-
-    /* 底部反密码子小平台 */
-    .anticodon-platform {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%) translateY(14px);
-      width: 80px;
-      height: 12px;
-      border-radius: 999px;
-      background: #e0f2fe;
-      border: 1px solid #0ea5e9;
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 4px;
-    }
-    .anticodon-cells {
-      display: flex;
-      gap: 4px;
-    }
-    .anticodon-cell {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-      background: #e5e7eb;
-      border: 1px solid #cbd5e1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: #0f172a;
-    }
-    .anticodon-text {
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      color: #0f172a;
-    }
-
-    /* 氢键虚线（从活跃密码子到反密码子） */
-    .pair-line {
-      position: absolute;
-      width: 2px;
-      height: 26px;
-      background-image: linear-gradient(to bottom, #94a3b8 0, #94a3b8 50%, transparent 50%, transparent 100%);
-      background-size: 2px 6px;
-      bottom: 34px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .pair-line:nth-child(1) { transform: translateX(-22px); }
-    .pair-line:nth-child(2) { transform: translateX(0); }
-    .pair-line:nth-child(3) { transform: translateX(22px); }
-
-    .mrna-label-text {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #64748b;
-      text-align: center;
-    }
-
-    @media (max-width: 720px) {
-      .diagram-inner { width: 100%; }
-      .trna-wrapper { right: 8px; }
+      .result-main { flex-direction: column; }
     }
   </style>
 </head>
@@ -561,16 +248,16 @@
   <div class="page-wrap">
     <header>
       <h1>遗传密码子交互实验台</h1>
-      <p>交互式学习 mRNA 密码子、tRNA 反密码子及翻译过程</p>
+      <p>拼装或输入密码子，快速查看对应氨基酸、反密码子和简并性</p>
     </header>
 
-    <!-- 上方左右两块：拼装 + 检索 -->
+    <!-- 上方：拼装 + 检索 -->
     <div class="layout">
       <!-- 左：拼装 -->
       <section class="card">
-        <h2>① 密码子拼装实验</h2>
+        <h2>① 拼装密码子</h2>
         <div class="hint">
-          点击碱基卡片组合三联体密码子（RNA）。拼装完成后将自动解析对应氨基酸及配对关系。
+          依次点击 A / U / G / C 组合出一个 mRNA 三联体密码子（5′→3′）。
         </div>
 
         <div class="bases">
@@ -595,130 +282,36 @@
 
       <!-- 右：检索 -->
       <section class="card">
-        <h2>② 密码子检索工具</h2>
+        <h2>② 直接输入密码子</h2>
         <div class="hint">
-          输入任意三联体密码子进行查询，可用于验证作业或快速查看简并性。
+          输入任意一个三联体密码子（可输入 RNA 或含 T 的 DNA 密码子），点击“查询”。
         </div>
 
         <div class="search-row">
           <input id="codon-input" type="text" maxlength="3" placeholder="例如 AUG" />
-          <button id="search-btn">查询 CODON</button>
+          <button id="search-btn">查询</button>
         </div>
         <div class="search-hint">
-          · 支持 RNA：A / U / G / C<br/>
-          · 支持 DNA：如果输入中含有 T，将自动按 U 处理（如 <code>ATG</code> → <code>AUG</code>）。
+          · RNA：使用 A / U / C / G<br/>
+          · DNA：若含 T，将自动按 U 处理（如 <code>ATG</code> → <code>AUG</code>）
         </div>
 
         <div id="error-msg" class="error"></div>
       </section>
     </div>
 
-    <!-- ===== 翻译过程动态示意：放在 RESULT 上方 ===== -->
-    <section class="diagram-card">
-      <h2 class="diagram-title">③ 翻译过程动态示意</h2>
-      <div class="diagram-hint">
-        第一步：输入或拼装密码子，mRNA 链中央的发光框中显示当前三联体；<br/>
-        第二步：生成对应的 tRNA 反密码子和颜色代表的氨基酸；<br/>
-        第三步：0.3 秒后 tRNA 从右上方向移动到 mRNA 上方完成配对。下一次输入密码子时，上一个 tRNA 消失，只留下肽链中的氨基酸小球，新的 tRNA 再次移动过来。
-      </div>
-
-      <div class="diagram-wrap">
-        <div class="diagram-inner">
-          <!-- 肽链波浪 -->
-          <div class="peptide-bar">
-            <span class="peptide-label">肽链：</span>
-            <div class="peptide-track" id="peptide-track">
-              <div class="peptide-bead" id="pep-0"></div>
-              <div class="peptide-bead" id="pep-1"></div>
-              <div class="peptide-bead" id="pep-2"></div>
-              <div class="peptide-bead" id="pep-3"></div>
-              <div class="peptide-bead" id="pep-4"></div>
-              <div class="peptide-bead" id="pep-5"></div>
-              <div class="peptide-bead" id="pep-6"></div>
-            </div>
-          </div>
-
-          <!-- mRNA & tRNA 总区域 -->
-          <div class="mrna-box">
-            <div class="mrna-caption">第一步：输入密码子（5′ → 3′）</div>
-
-            <!-- 上面一行：示意整条 mRNA -->
-            <div class="mrna-track">
-              <span class="mrna-label">5′</span>
-              <div class="mrna-slot-row">
-                <div class="mrna-slot">AUG</div>
-                <div class="mrna-slot">UGC</div>
-                <div class="mrna-slot active">当前</div>
-                <div class="mrna-slot">AAA</div>
-                <div class="mrna-slot">CCC</div>
-                <div class="mrna-slot">GAA</div>
-              </div>
-              <span class="mrna-label">3′</span>
-            </div>
-
-            <!-- 中央发光密码子框 -->
-            <div class="mrna-active-area">
-              <div class="active-frame" id="active-frame">
-                <div class="active-cell" id="active-letter-0">_</div>
-                <div class="active-cell" id="active-letter-1">_</div>
-                <div class="active-cell" id="active-letter-2">_</div>
-              </div>
-            </div>
-
-            <div class="mrna-step-label">当前正在被核糖体读取的密码子</div>
-
-            <div class="mrna-label-text">mRNA 5′ → 3′</div>
-
-            <!-- tRNA 动画对象 -->
-            <div class="trna-wrapper" id="trna-wrapper">
-              <div class="trna-body">
-                <div class="trna-main-circle"></div>
-                <div class="trna-loop-left"></div>
-                <div class="trna-loop-right"></div>
-                <div class="trna-loop-bottom"></div>
-                <div class="trna-small-loop"></div>
-                <div class="trna-stem-top"></div>
-                <div class="trna-stem-bottom"></div>
-
-                <!-- 氨基酸球 -->
-                <div class="aa-circle" id="aa-circle">
-                  氨基酸
-                  <span class="aa-name" id="aa-name">—</span>
-                </div>
-
-                <!-- 反密码子平台 -->
-                <div class="anticodon-platform">
-                  <div class="anticodon-cells">
-                    <div class="anticodon-cell" id="anti-cell-0">_</div>
-                    <div class="anticodon-cell" id="anti-cell-1">_</div>
-                    <div class="anticodon-cell" id="anti-cell-2">_</div>
-                  </div>
-                </div>
-                <div class="anticodon-text" id="anticodon-text">反密码子 3′→5′</div>
-              </div>
-            </div>
-
-            <!-- 三条虚线氢键 -->
-            <div class="pair-line" id="pair-line-0"></div>
-            <div class="pair-line" id="pair-line-1"></div>
-            <div class="pair-line" id="pair-line-2"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 结果卡片（仍然显示详细信息） ===== -->
+    <!-- 下方：查询结果 -->
     <section id="result-card" class="result-card" style="display:none;">
-      <div class="result-header" id="result-source">RESULT</div>
-      <div class="result-grid" id="result-grid"></div>
-      <div class="muted">
-        注：第三位碱基常出现“摇摆配对”（wobble），因此多种密码子可以编码同一氨基酸，这构成了遗传密码的简并性。
-      </div>
+      <h2 class="result-title">查询结果</h2>
+
+      <div class="result-main" id="result-main"></div>
+
+      <div class="detail" id="result-detail"></div>
     </section>
   </div>
 
   <script>
-    /* === 1. 遗传密码表 & 颜色 === */
+    /* ====== 遗传密码表 ====== */
     const CODON_TABLE = {
       "UUU": { aa: "Phe", name: "苯丙氨酸" },
       "UUC": { aa: "Phe", name: "苯丙氨酸" },
@@ -786,37 +379,6 @@
       "GGG": { aa: "Gly", name: "甘氨酸" }
     };
 
-    const BASE_COLORS = {
-      A: "#fb923c",
-      U: "#38bdf8",
-      G: "#34d399",
-      C: "#fbbf24"
-    };
-
-    const AA_COLORS = {
-      Phe: "#f97316",
-      Leu: "#22c55e",
-      Ile: "#22c55e",
-      Met: "#22c55e",
-      Val: "#22c55e",
-      Ser: "#0ea5e9",
-      Pro: "#6366f1",
-      Thr: "#0ea5e9",
-      Ala: "#4ade80",
-      Tyr: "#facc15",
-      Cys: "#a3e635",
-      Trp: "#6366f1",
-      His: "#a855f7",
-      Gln: "#06b6d4",
-      Asn: "#06b6d4",
-      Lys: "#3b82f6",
-      Asp: "#f97373",
-      Glu: "#fb7185",
-      Arg: "#8b5cf6",
-      Gly: "#22d3ee",
-      Stop: "#94a3b8"
-    };
-
     function normalizeCodon(raw) {
       if (!raw) return { ok: false, error: "请输入 3 个碱基。" };
       let s = raw.trim().toUpperCase();
@@ -825,7 +387,6 @@
       if (!/^[AUCG]{3}$/.test(s)) return { ok: false, error: "只允许 A / U / C / G（或含 T 的 DNA 密码子）。" };
       return { ok: true, codon: s };
     }
-
     function complementRNA(base) {
       switch (base) {
         case "A": return "U";
@@ -835,12 +396,10 @@
         default: return "";
       }
     }
-
     function rnaToDnaTemplate(codon) {
       const map = { A: "T", U: "A", C: "G", G: "C" };
       return codon.split("").map(b => map[b] || "_").join("");
     }
-
     function getSynonymousCodons(aaCode) {
       return Object.entries(CODON_TABLE)
         .filter(([c, info]) => info.aa === aaCode)
@@ -848,7 +407,7 @@
         .sort();
     }
 
-    /* === 2. DOM 元素引用 === */
+    /* ====== DOM 引用 ====== */
     const slots = [
       document.getElementById("slot-0"),
       document.getElementById("slot-1"),
@@ -856,144 +415,29 @@
     ];
     const errorMsg = document.getElementById("error-msg");
     const resultCard = document.getElementById("result-card");
-    const resultGrid = document.getElementById("result-grid");
-    const resultSource = document.getElementById("result-source");
+    const resultMain = document.getElementById("result-main");
+    const resultDetail = document.getElementById("result-detail");
     const codonInput = document.getElementById("codon-input");
     const searchBtn = document.getElementById("search-btn");
     const btnBackspace = document.getElementById("btn-backspace");
     const btnClear = document.getElementById("btn-clear");
 
-    const activeLetters = [
-      document.getElementById("active-letter-0"),
-      document.getElementById("active-letter-1"),
-      document.getElementById("active-letter-2")
-    ];
-    const activeFrame = document.getElementById("active-frame");
-    const trnaWrapper = document.getElementById("trna-wrapper");
-    const aaCircle = document.getElementById("aa-circle");
-    const aaName = document.getElementById("aa-name");
-    const antiCells = [
-      document.getElementById("anti-cell-0"),
-      document.getElementById("anti-cell-1"),
-      document.getElementById("anti-cell-2")
-    ];
-    const anticodonText = document.getElementById("anticodon-text");
-    const peptideBeads = [
-      document.getElementById("pep-0"),
-      document.getElementById("pep-1"),
-      document.getElementById("pep-2"),
-      document.getElementById("pep-3"),
-      document.getElementById("pep-4"),
-      document.getElementById("pep-5"),
-      document.getElementById("pep-6")
-    ];
-
     let currentCodon = [];
-    let startedTranslation = false;
-    let lastAAColor = null;
-    let lastAAText = "—";
-    let chainIndex = 0;
-
-    /* 初始化显示 */
-    function resetActiveFrame() {
-      activeFrame.classList.add("active-empty");
-      activeLetters.forEach(el => el.textContent = "_");
-    }
-    resetActiveFrame();
 
     function updateSlots() {
       for (let i = 0; i < 3; i++) {
         slots[i].textContent = currentCodon[i] || "_";
       }
-      if (currentCodon.length !== 3) {
-        resetActiveFrame();
-      }
     }
 
-    /* === 3. 翻译动态区：更新并执行动画 === */
-    function animateTranslation(codon, info, anticodon) {
-      const bases = codon.split("");
-      // 更新 mRNA 发光框
-      activeFrame.classList.remove("active-empty");
-      bases.forEach((b, i) => {
-        activeLetters[i].textContent = b;
-        activeLetters[i].style.color = "#0f172a";
-        activeLetters[i].style.background = BASE_COLORS[b] || "#ffffff";
-        activeLetters[i].style.borderColor = BASE_COLORS[b] || "#22c55e";
-      });
-
-      // 更新反密码子文字 & 彩色方块（注意 3'→5' 顺序）
-      const antiArr = anticodon.split("");
-      anticodonText.textContent = "反密码子 3′→5′：" + antiArr.join(" ");
-      antiArr.forEach((b, i) => {
-        antiCells[i].textContent = b;
-        antiCells[i].style.background = BASE_COLORS[b] || "#e5e7eb";
-        antiCells[i].style.borderColor = BASE_COLORS[b] || "#cbd5e1";
-      });
-
-      // 更新 tRNA 顶端氨基酸球颜色和文字
-      const aaColor = AA_COLORS[info.aa] || "#22c55e";
-      if (info.aa === "Stop") {
-        aaName.textContent = "终止信号";
-      } else {
-        aaName.textContent = info.name + " (" + info.aa + ")";
-      }
-      aaCircle.style.borderColor = aaColor;
-      aaCircle.style.boxShadow = "0 0 0 3px " + aaColor + "33";
-
-      // 肽链逻辑：
-      // 第一次：只出现 tRNA，不加链；
-      // 之后每次新密码子：把上一次的氨基酸颜色固定到肽链，然后新 tRNA 飞过来。
-      if (!startedTranslation) {
-        startedTranslation = true;
-        lastAAColor = aaColor;
-        lastAAText = aaName.textContent;
-        trnaWrapper.style.opacity = 0;
-        trnaWrapper.classList.remove("active");
-        // 0.3s 后飞到配对位置
-        setTimeout(() => {
-          trnaWrapper.style.opacity = 1;
-          trnaWrapper.classList.add("active");
-          aaCircle.classList.remove("aa-pop");
-          void aaCircle.offsetWidth;
-          aaCircle.classList.add("aa-pop");
-        }, 300);
-        return;
-      }
-
-      // 把之前的氨基酸加入肽链
-      if (lastAAColor && chainIndex < peptideBeads.length) {
-        const bead = peptideBeads[chainIndex];
-        bead.style.backgroundColor = lastAAColor;
-        bead.style.borderColor = lastAAColor;
-        chainIndex++;
-      }
-
-      lastAAColor = aaColor;
-      lastAAText = aaName.textContent;
-
-      // 让 tRNA 回到起点再飞一次
-      trnaWrapper.classList.remove("active");
-      // 先瞬间回到右上（通过移除 active，再强制重绘）
-      void trnaWrapper.offsetWidth;
-      trnaWrapper.style.opacity = 0;
-      setTimeout(() => {
-        trnaWrapper.style.opacity = 1;
-        trnaWrapper.classList.add("active");
-        aaCircle.classList.remove("aa-pop");
-        void aaCircle.offsetWidth;
-        aaCircle.classList.add("aa-pop");
-      }, 300);
-    }
-
-    /* === 4. 结果卡片 === */
-    function showCodonInfo(codon, source) {
+    function showCodonInfo(codon) {
       const info = CODON_TABLE[codon];
       if (!info) {
-        errorMsg.textContent = "该密码子在当前标准遗传密码表中未找到。";
+        errorMsg.textContent = "该密码子在标准遗传密码表中未找到。";
         resultCard.style.display = "none";
         return;
       }
+      errorMsg.textContent = "";
 
       const aaCode = info.aa;
       const synonymous = getSynonymousCodons(aaCode);
@@ -1001,6 +445,31 @@
       const anticodon = codon.split("").map(complementRNA).reverse().join("");
       const dnaTemplate = rnaToDnaTemplate(codon);
 
+      // 上半部分：关键信息
+      resultMain.innerHTML = `
+        <div class="result-main-block">
+          <div class="key-row">
+            <span class="key-label">mRNA 密码子 (5′→3′)：</span>
+            <span class="key-value"><code>${codon}</code></span>
+          </div>
+          <div class="key-row">
+            <span class="key-label">氨基酸：</span>
+            <span class="key-value">${info.name} (${aaCode})</span>
+          </div>
+        </div>
+        <div class="result-main-block">
+          <div class="key-row">
+            <span class="key-label">tRNA 反密码子 (3′→5′)：</span>
+            <span class="key-value"><code>${anticodon}</code></span>
+          </div>
+          <div class="key-row">
+            <span class="key-label">DNA 模板链 (3′→5′)：</span>
+            <span class="key-value"><code>${dnaTemplate}</code></span>
+          </div>
+        </div>
+      `;
+
+      // 下半部分：简并性 + 备注
       let degText;
       if (aaCode === "Stop") {
         degText = `共有 <strong>${degeneracy}</strong> 个终止密码子。`;
@@ -1008,41 +477,31 @@
         degText = `这种氨基酸共有 <strong>${degeneracy}</strong> 个不同密码子编码，本密码子是其中之一。`;
       }
 
-      const noteText = info.note ? `<div><span class="label">备注：</span>${info.note}</div>` : "";
+      const noteText = info.note ? `；<strong>特别提示：</strong>${info.note}` : "";
 
-      resultSource.textContent = source === "builder"
-        ? "RESULT · FROM CODON ASSEMBLY"
-        : "RESULT · FROM CODON QUERY";
-
-      resultGrid.innerHTML = `
-        <div>
-          <div><span class="label">mRNA 密码子 (5′→3′)：</span><code>${codon}</code></div>
-          <div><span class="label">氨基酸：</span>${info.name} (${aaCode})</div>
-          ${noteText}
-          <div style="margin-top:4px;"><span class="label">简并性：</span>${degText}</div>
+      resultDetail.innerHTML = `
+        <div><strong>同义密码子：</strong>
+          <span class="chip-row">
+            ${synonymous.map(c => `<span class="chip">${c}</span>`).join("")}
+          </span>
         </div>
-        <div>
-          <div><span class="label">同义密码子：</span>${synonymous.join(", ")}</div>
-          <div style="margin-top:4px;"><span class="label">tRNA 反密码子 (3′→5′)：</span><code>${anticodon}</code></div>
-          <div style="margin-top:4px;"><span class="label">DNA 模板链 (3′→5′)：</span><code>${dnaTemplate}</code></div>
+        <div style="margin-top:6px;">
+          <strong>简并性说明：</strong>${degText}${noteText}
         </div>
       `;
-      resultCard.style.display = "block";
 
-      // 同时更新上面的动态图
-      animateTranslation(codon, info, anticodon);
+      resultCard.style.display = "block";
     }
 
-    /* === 5. 交互事件：拼装区 === */
+    /* ====== 拼装按钮 ====== */
     document.querySelectorAll(".base-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         if (currentCodon.length >= 3) return;
         currentCodon.push(btn.dataset.base);
         updateSlots();
-        errorMsg.textContent = "";
         if (currentCodon.length === 3) {
           const codon = currentCodon.join("");
-          showCodonInfo(codon, "builder");
+          showCodonInfo(codon);
         }
       });
     });
@@ -1061,7 +520,7 @@
       resultCard.style.display = "none";
     });
 
-    /* === 6. 搜索区 === */
+    /* ====== 输入查询 ====== */
     function handleSearch() {
       const norm = normalizeCodon(codonInput.value);
       if (!norm.ok) {
@@ -1069,9 +528,8 @@
         resultCard.style.display = "none";
         return;
       }
-      errorMsg.textContent = "";
       codonInput.value = norm.codon;
-      showCodonInfo(norm.codon, "query");
+      showCodonInfo(norm.codon);
     }
 
     searchBtn.addEventListener("click", handleSearch);
