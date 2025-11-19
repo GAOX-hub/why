@@ -2,173 +2,1084 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>密码子的特点·教学板书</title>
+  <title>遗传密码子交互实验台</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f3f6fb;
-      color: #0f172a;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #d9f7f2 0, #ecfbff 40%, #f7fbff 100%);
+      color: #111827;
     }
-    .page {
-      max-width: 1200px;
-      margin: 30px auto 50px;
-      padding: 0 20px;
-    }
-    h1.title {
-      text-align: center;
-      font-size: 30px;
-      margin-bottom: 24px;
-      color: #0f172a;
+    .page-wrap {
+      max-width: 1100px;
+      margin: 24px auto 40px;
+      padding: 0 20px 40px;
     }
 
-    /* 上方小卡片：标题 + 概述 */
-    .top-row {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 18px;
+    header {
+      text-align: center;
+      margin-bottom: 24px;
     }
-    .top-card {
-      background: #3369c8;
-      color: #ffffff;
-      border-radius: 4px;
-      padding: 10px 12px;
-      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25);
-      font-size: 13px;
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #064e3b;
     }
-    .top-card h2 {
-      margin: 0 0 6px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-    .top-card p {
+    header p {
       margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .card {
+      flex: 1 1 320px;
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e0f2f1;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      padding: 16px 18px 18px;
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #064e3b;
+    }
+    .hint {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 10px;
       line-height: 1.5;
     }
 
-    /* 下方大卡片：具体表现 + 生物学意义 */
-    .bottom-row {
+    /* 拼装区 */
+    .bases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .base-btn {
+      min-width: 44px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: none;
+      background: #14b8a6;
+      color: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 4px 10px rgba(20, 184, 166, 0.35);
+    }
+    .base-btn:hover {
+      background: #0f766e;
+      transform: translateY(-1px);
+    }
+    .codon-display {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .codon-slot {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 2px solid #a7f3d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: rgba(240, 253, 250, 0.9);
+      box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.2);
+    }
+    .codon-label {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .builder-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .small-btn {
+      padding: 5px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f766e;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .small-btn:hover {
+      background: #e0f2fe;
+    }
+
+    /* 搜索区 */
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    #codon-input {
+      padding: 6px 10px;
+      font-size: 18px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      width: 130px;
+      text-transform: uppercase;
+    }
+    #codon-input::placeholder {
+      color: #9ca3af;
+    }
+    #search-btn {
+      padding: 6px 16px;
+      font-size: 14px;
+      border-radius: 999px;
+      border: none;
+      background: #14b8a6;
+      color: #ecfeff;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(20, 184, 166, 0.35);
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    #search-btn:hover {
+      background: #0f766e;
+      transform: translateY(-1px);
+    }
+    .search-hint {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+    .error {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #b91c1c;
+    }
+
+    /* 结果卡片 */
+    .result-card {
+      margin-top: 20px;
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e0f2f1;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+      padding: 16px 18px 14px;
+    }
+    .result-header {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .result-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+      gap: 8px 20px;
+      font-size: 14px;
+    }
+    .label {
+      font-weight: 600;
+      margin-right: 4px;
+      color: #111827;
+    }
+    .muted {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #64748b;
+    }
+    code {
+      background: #f1f5f9;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      padding: 1px 4px;
+      font-size: 90%;
+    }
+
+    @media (max-width: 720px) {
+      .result-grid { grid-template-columns: minmax(0,1fr); }
+    }
+
+    /* ========= 翻译过程动态示意（放在结果上方） ========= */
+    .diagram-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e0f2f1;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+      padding: 16px 18px 20px;
       margin-top: 10px;
     }
-    .bottom-card {
-      background: #2853a6;
-      color: #ffffff;
-      border-radius: 4px;
-      padding: 12px 14px;
-      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25);
+    .diagram-title {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: #064e3b;
+    }
+    .diagram-hint {
       font-size: 13px;
-      line-height: 1.6;
+      color: #64748b;
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
-    .bottom-card h3 {
-      margin: 0 0 6px;
+
+    .diagram-wrap {
+      margin-top: 4px;
+      display: flex;
+      justify-content: center;
+    }
+    .diagram-inner {
+      width: 620px;
+      max-width: 100%;
+      position: relative;
+      padding: 8px 8px 0;
+    }
+
+    /* 上方肽链波浪 */
+    .peptide-bar {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+    .peptide-track {
+      display: flex;
+      gap: 8px;
+    }
+    .peptide-bead {
+      border-radius: 50%;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .peptide-bead:nth-child(1) { width: 12px; height: 12px; transform: translateY(4px); }
+    .peptide-bead:nth-child(2) { width: 14px; height: 14px; transform: translateY(-3px); }
+    .peptide-bead:nth-child(3) { width: 16px; height: 16px; transform: translateY(5px); }
+    .peptide-bead:nth-child(4) { width: 14px; height: 14px; transform: translateY(-2px); }
+    .peptide-bead:nth-child(5) { width: 18px; height: 18px; transform: translateY(3px); }
+    .peptide-bead:nth-child(6) { width: 16px; height: 16px; transform: translateY(-4px); }
+    .peptide-bead:nth-child(7) { width: 20px; height: 20px; transform: translateY(2px); }
+
+    .peptide-label {
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* mRNA 区域 */
+    .mrna-box {
+      margin-top: 6px;
+      background: #ecfeff;
+      border-radius: 16px;
+      padding: 18px 18px 20px;
+      border: 1px solid #bae6fd;
+      position: relative;
+      overflow: hidden;
+    }
+    .mrna-caption {
       font-size: 14px;
-      font-weight: 700;
+      color: #0f766e;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
-    .bottom-card p {
-      margin: 0 0 6px;
+    .mrna-track {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
     }
-    .bottom-card p:last-child {
-      margin-bottom: 0;
+    .mrna-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-right: 4px;
+    }
+    .mrna-slot-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+    .mrna-slot {
+      min-width: 54px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #ccfbf1;
+      font-size: 14px;
+      color: #0f172a;
+      text-align: center;
+    }
+    .mrna-slot.active {
+      background: #f97316;
+      color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.45);
     }
 
-    /* 标签小标题 “具体表现 / 生物学意义 / 规律 / 其它情况 / 关键术语” */
-    .label {
-      font-weight: 700;
-      margin-right: 3px;
+    /* 中央发光密码子（动画区域） */
+    .mrna-active-area {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .active-frame {
+      display: flex;
+      gap: 4px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(240, 249, 255, 0.9);
+      box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.45), 0 0 12px rgba(34, 197, 94, 0.35);
+      border: 1px solid #a7f3d0;
+    }
+    .active-cell {
+      width: 26px;
+      height: 32px;
+      border-radius: 6px;
+      border: 2px solid rgba(45, 212, 191, 0.4);
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      box-shadow: 0 0 8px rgba(45, 212, 191, 0.3) inset;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .active-empty .active-cell {
+      background: rgba(255, 255, 255, 0.7);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.6);
+      box-shadow: none;
     }
 
-    /* 响应式：屏幕窄时自动排成多行 */
-    @media (max-width: 1100px) {
-      .top-row, .bottom-row {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
+    .mrna-step-label {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
     }
-    @media (max-width: 760px) {
-      .top-row, .bottom-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+
+    /* tRNA 动画对象 */
+    .trna-wrapper {
+      position: absolute;
+      right: 32px;
+      top: 26px;
+      width: 150px;
+      height: 150px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(90px, -60px);
+      transition: transform 0.45s ease-out, opacity 0.25s ease-out;
     }
-    @media (max-width: 520px) {
-      .top-row, .bottom-row {
-        grid-template-columns: 1fr;
-      }
+    .trna-wrapper.active {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .trna-body {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+    }
+    .trna-main-circle {
+      position: absolute;
+      top: 52px;
+      left: 49px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 5px solid #38bdf8;
+    }
+    .trna-loop-left,
+    .trna-loop-right {
+      position: absolute;
+      top: 60px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 5px solid #38bdf8;
+    }
+    .trna-loop-left { left: 10px; }
+    .trna-loop-right { right: 10px; }
+    .trna-loop-bottom {
+      position: absolute;
+      bottom: 12px;
+      left: 54px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 5px solid #38bdf8;
+    }
+    .trna-small-loop {
+      position: absolute;
+      top: 90px;
+      left: 96px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 5px solid #38bdf8;
+    }
+    .trna-stem-top {
+      position: absolute;
+      top: 2px;
+      left: 73px;
+      width: 6px;
+      height: 50px;
+      background: #38bdf8;
+      border-radius: 999px;
+    }
+    .trna-stem-bottom {
+      position: absolute;
+      top: 88px;
+      left: 86px;
+      width: 6px;
+      height: 34px;
+      background: #38bdf8;
+      border-radius: 999px;
+    }
+
+    /* 顶端 A-OH 氨基酸球 */
+    .aa-circle {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #22c55e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+    }
+    .aa-name {
+      margin-top: 2px;
+      font-size: 10px;
+    }
+    .aa-pop {
+      animation: aa-pop 0.35s ease-out;
+    }
+    @keyframes aa-pop {
+      0% { transform: translateX(-50%) scale(0.85); opacity: 0.6; }
+      70% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1); opacity: 1; }
+    }
+
+    /* 底部反密码子小平台 */
+    .anticodon-platform {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(14px);
+      width: 80px;
+      height: 12px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      border: 1px solid #0ea5e9;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+    .anticodon-cells {
+      display: flex;
+      gap: 4px;
+    }
+    .anticodon-cell {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: #e5e7eb;
+      border: 1px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #0f172a;
+    }
+    .anticodon-text {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: #0f172a;
+    }
+
+    /* 氢键虚线（从活跃密码子到反密码子） */
+    .pair-line {
+      position: absolute;
+      width: 2px;
+      height: 26px;
+      background-image: linear-gradient(to bottom, #94a3b8 0, #94a3b8 50%, transparent 50%, transparent 100%);
+      background-size: 2px 6px;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .pair-line:nth-child(1) { transform: translateX(-22px); }
+    .pair-line:nth-child(2) { transform: translateX(0); }
+    .pair-line:nth-child(3) { transform: translateX(22px); }
+
+    .mrna-label-text {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #64748b;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .diagram-inner { width: 100%; }
+      .trna-wrapper { right: 8px; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <h1 class="title">密码子的特点</h1>
+  <div class="page-wrap">
+    <header>
+      <h1>遗传密码子交互实验台</h1>
+      <p>交互式学习 mRNA 密码子、tRNA 反密码子及翻译过程</p>
+    </header>
 
-    <!-- 顶部：5 个小卡片，总览 -->
-    <div class="top-row">
-      <div class="top-card">
-        <h2>1. 方向性</h2>
-        <p>mRNA 分子中遗传密码的阅读方向是固定的，从 5′ 端到 3′ 端。</p>
-      </div>
-      <div class="top-card">
-        <h2>2. 连续性</h2>
-        <p>位于起始密码子和终止密码子之间的编码序列是连续不断的，密码子之间没有间隔或分叉。</p>
-      </div>
-      <div class="top-card">
-        <h2>3. 简并性</h2>
-        <p>多数氨基酸可以由多个不同的密码子编码，存在“多对一”的对应关系。</p>
-      </div>
-      <div class="top-card">
-        <h2>4. 通用性</h2>
-        <p>绝大多数生物共用同一套遗传密码，是基因工程得以实现的重要基础。</p>
-      </div>
-      <div class="top-card">
-        <h2>5. 摇动性</h2>
-        <p>密码子第三位碱基与 tRNA 反密码子第一位碱基的配对规则相对灵活，允许一定程度的非标准配对。</p>
-      </div>
+    <!-- 上方左右两块：拼装 + 检索 -->
+    <div class="layout">
+      <!-- 左：拼装 -->
+      <section class="card">
+        <h2>① 密码子拼装实验</h2>
+        <div class="hint">
+          点击碱基卡片组合三联体密码子（RNA）。拼装完成后将自动解析对应氨基酸及配对关系。
+        </div>
+
+        <div class="bases">
+          <button class="base-btn" data-base="A">A</button>
+          <button class="base-btn" data-base="U">U</button>
+          <button class="base-btn" data-base="G">G</button>
+          <button class="base-btn" data-base="C">C</button>
+        </div>
+
+        <div class="codon-display">
+          <div class="codon-slot" id="slot-0">_</div>
+          <div class="codon-slot" id="slot-1">_</div>
+          <div class="codon-slot" id="slot-2">_</div>
+          <div class="codon-label">mRNA 5′ → 3′</div>
+        </div>
+
+        <div class="builder-actions">
+          <button class="small-btn" id="btn-backspace">删掉最后一位</button>
+          <button class="small-btn" id="btn-clear">清空密码子</button>
+        </div>
+      </section>
+
+      <!-- 右：检索 -->
+      <section class="card">
+        <h2>② 密码子检索工具</h2>
+        <div class="hint">
+          输入任意三联体密码子进行查询，可用于验证作业或快速查看简并性。
+        </div>
+
+        <div class="search-row">
+          <input id="codon-input" type="text" maxlength="3" placeholder="例如 AUG" />
+          <button id="search-btn">查询 CODON</button>
+        </div>
+        <div class="search-hint">
+          · 支持 RNA：A / U / G / C<br/>
+          · 支持 DNA：如果输入中含有 T，将自动按 U 处理（如 <code>ATG</code> → <code>AUG</code>）。
+        </div>
+
+        <div id="error-msg" class="error"></div>
+      </section>
     </div>
 
-    <!-- 底部：5 个大卡片，详细讲解 -->
-    <div class="bottom-row">
-      <!-- 1 方向性 -->
-      <div class="bottom-card">
-        <h3>1. 方向性</h3>
-        <p><span class="label">具体表现：</span>起始密码子位于 mRNA 开放阅读框的 5′ 末端，终止密码子位于 mRNA 的 3′ 末端。</p>
-        <p><span class="label">生物学意义：</span>方向性决定了蛋白质合成的方向是从 N 末端（氨基端）到 C 末端（羧基端）。</p>
+    <!-- ===== 翻译过程动态示意：放在 RESULT 上方 ===== -->
+    <section class="diagram-card">
+      <h2 class="diagram-title">③ 翻译过程动态示意</h2>
+      <div class="diagram-hint">
+        第一步：输入或拼装密码子，mRNA 链中央的发光框中显示当前三联体；<br/>
+        第二步：生成对应的 tRNA 反密码子和颜色代表的氨基酸；<br/>
+        第三步：0.3 秒后 tRNA 从右上方向移动到 mRNA 上方完成配对。下一次输入密码子时，上一个 tRNA 消失，只留下肽链中的氨基酸小球，新的 tRNA 再次移动过来。
       </div>
 
-      <!-- 2 连续性 -->
-      <div class="bottom-card">
-        <h3>2. 连续性</h3>
-        <p><span class="label">具体表现：</span>三联体密码子一个接一个地连续排列，中间没有标点和间隔。</p>
-        <p><span class="label">生物学意义：</span>保证了遗传信息被准确读取。一旦发生非 3 的倍数的碱基插入或缺失，就会破坏这种连续性，导致移码突变，使突变点下游的氨基酸序列全部发生错误。</p>
-      </div>
+      <div class="diagram-wrap">
+        <div class="diagram-inner">
+          <!-- 肽链波浪 -->
+          <div class="peptide-bar">
+            <span class="peptide-label">肽链：</span>
+            <div class="peptide-track" id="peptide-track">
+              <div class="peptide-bead" id="pep-0"></div>
+              <div class="peptide-bead" id="pep-1"></div>
+              <div class="peptide-bead" id="pep-2"></div>
+              <div class="peptide-bead" id="pep-3"></div>
+              <div class="peptide-bead" id="pep-4"></div>
+              <div class="peptide-bead" id="pep-5"></div>
+              <div class="peptide-bead" id="pep-6"></div>
+            </div>
+          </div>
 
-      <!-- 3 简并性 -->
-      <div class="bottom-card">
-        <h3>3. 简并性</h3>
-        <p><span class="label">具体表现：</span>61 个有意义密码子编码 20 种氨基酸。除甲硫氨酸（AUG）和色氨酸（UGG）仅有一个密码子外，其余 18 种氨基酸都有 2 个或以上的密码子。</p>
-        <p>编码同一种氨基酸的不同密码子称为<strong>同义密码子</strong>。</p>
-        <p><span class="label">规律：</span>同义密码子的前两位碱基通常相同，差异主要在第三位碱基。这表明密码子的性质主要由前两位碱基决定。</p>
-      </div>
+          <!-- mRNA & tRNA 总区域 -->
+          <div class="mrna-box">
+            <div class="mrna-caption">第一步：输入密码子（5′ → 3′）</div>
 
-      <!-- 4 通用性 -->
-      <div class="bottom-card">
-        <h3>4. 通用性</h3>
-        <p><span class="label">生物学意义：</span>这是基因工程的理论基础，使得一种生物（如细菌）能够表达另一种生物（如人类）的基因并产生有功能的蛋白质。</p>
-        <p><span class="label">其它情况：</span>存在少数例外，如线粒体或某些单细胞生物的遗传密码与标准密码表略有差异。</p>
-      </div>
+            <!-- 上面一行：示意整条 mRNA -->
+            <div class="mrna-track">
+              <span class="mrna-label">5′</span>
+              <div class="mrna-slot-row">
+                <div class="mrna-slot">AUG</div>
+                <div class="mrna-slot">UGC</div>
+                <div class="mrna-slot active">当前</div>
+                <div class="mrna-slot">AAA</div>
+                <div class="mrna-slot">CCC</div>
+                <div class="mrna-slot">GAA</div>
+              </div>
+              <span class="mrna-label">3′</span>
+            </div>
 
-      <!-- 5 摇动性 -->
-      <div class="bottom-card">
-        <h3>5. 摇动性</h3>
-        <p><span class="label">具体表现：</span>一种 tRNA 上的反密码子可以通过“摆动”识别多个第三位碱基不同但编码同一种氨基酸的密码子。</p>
-        <p><span class="label">生物学意义：</span>解释了为什么第三位碱基发生改变时，往往仍能编码相同的氨基酸；同时减少了细胞内 tRNA 种类数量的需要（无需每个密码子都对应一种独特的 tRNA）。</p>
-        <p><span class="label">关键术语：</span>发生这种非标准配对的第三位碱基被称为<strong>摇动位点</strong>（wobble position）。</p>
+            <!-- 中央发光密码子框 -->
+            <div class="mrna-active-area">
+              <div class="active-frame" id="active-frame">
+                <div class="active-cell" id="active-letter-0">_</div>
+                <div class="active-cell" id="active-letter-1">_</div>
+                <div class="active-cell" id="active-letter-2">_</div>
+              </div>
+            </div>
+
+            <div class="mrna-step-label">当前正在被核糖体读取的密码子</div>
+
+            <div class="mrna-label-text">mRNA 5′ → 3′</div>
+
+            <!-- tRNA 动画对象 -->
+            <div class="trna-wrapper" id="trna-wrapper">
+              <div class="trna-body">
+                <div class="trna-main-circle"></div>
+                <div class="trna-loop-left"></div>
+                <div class="trna-loop-right"></div>
+                <div class="trna-loop-bottom"></div>
+                <div class="trna-small-loop"></div>
+                <div class="trna-stem-top"></div>
+                <div class="trna-stem-bottom"></div>
+
+                <!-- 氨基酸球 -->
+                <div class="aa-circle" id="aa-circle">
+                  氨基酸
+                  <span class="aa-name" id="aa-name">—</span>
+                </div>
+
+                <!-- 反密码子平台 -->
+                <div class="anticodon-platform">
+                  <div class="anticodon-cells">
+                    <div class="anticodon-cell" id="anti-cell-0">_</div>
+                    <div class="anticodon-cell" id="anti-cell-1">_</div>
+                    <div class="anticodon-cell" id="anti-cell-2">_</div>
+                  </div>
+                </div>
+                <div class="anticodon-text" id="anticodon-text">反密码子 3′→5′</div>
+              </div>
+            </div>
+
+            <!-- 三条虚线氢键 -->
+            <div class="pair-line" id="pair-line-0"></div>
+            <div class="pair-line" id="pair-line-1"></div>
+            <div class="pair-line" id="pair-line-2"></div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- ===== 结果卡片（仍然显示详细信息） ===== -->
+    <section id="result-card" class="result-card" style="display:none;">
+      <div class="result-header" id="result-source">RESULT</div>
+      <div class="result-grid" id="result-grid"></div>
+      <div class="muted">
+        注：第三位碱基常出现“摇摆配对”（wobble），因此多种密码子可以编码同一氨基酸，这构成了遗传密码的简并性。
+      </div>
+    </section>
   </div>
+
+  <script>
+    /* === 1. 遗传密码表 & 颜色 === */
+    const CODON_TABLE = {
+      "UUU": { aa: "Phe", name: "苯丙氨酸" },
+      "UUC": { aa: "Phe", name: "苯丙氨酸" },
+      "UUA": { aa: "Leu", name: "亮氨酸" },
+      "UUG": { aa: "Leu", name: "亮氨酸" },
+      "CUU": { aa: "Leu", name: "亮氨酸" },
+      "CUC": { aa: "Leu", name: "亮氨酸" },
+      "CUA": { aa: "Leu", name: "亮氨酸" },
+      "CUG": { aa: "Leu", name: "亮氨酸" },
+      "AUU": { aa: "Ile", name: "异亮氨酸" },
+      "AUC": { aa: "Ile", name: "异亮氨酸" },
+      "AUA": { aa: "Ile", name: "异亮氨酸" },
+      "AUG": { aa: "Met", name: "甲硫氨酸", note: "常见起始密码子" },
+      "GUU": { aa: "Val", name: "缬氨酸" },
+      "GUC": { aa: "Val", name: "缬氨酸" },
+      "GUA": { aa: "Val", name: "缬氨酸" },
+      "GUG": { aa: "Val", name: "缬氨酸" },
+      "UCU": { aa: "Ser", name: "丝氨酸" },
+      "UCC": { aa: "Ser", name: "丝氨酸" },
+      "UCA": { aa: "Ser", name: "丝氨酸" },
+      "UCG": { aa: "Ser", name: "丝氨酸" },
+      "AGU": { aa: "Ser", name: "丝氨酸" },
+      "AGC": { aa: "Ser", name: "丝氨酸" },
+      "CCU": { aa: "Pro", name: "脯氨酸" },
+      "CCC": { aa: "Pro", name: "脯氨酸" },
+      "CCA": { aa: "Pro", name: "脯氨酸" },
+      "CCG": { aa: "Pro", name: "脯氨酸" },
+      "ACU": { aa: "Thr", name: "苏氨酸" },
+      "ACC": { aa: "Thr", name: "苏氨酸" },
+      "ACA": { aa: "Thr", name: "苏氨酸" },
+      "ACG": { aa: "Thr", name: "苏氨酸" },
+      "GCU": { aa: "Ala", name: "丙氨酸" },
+      "GCC": { aa: "Ala", name: "丙氨酸" },
+      "GCA": { aa: "Ala", name: "丙氨酸" },
+      "GCG": { aa: "Ala", name: "丙氨酸" },
+      "UAU": { aa: "Tyr", name: "酪氨酸" },
+      "UAC": { aa: "Tyr", name: "酪氨酸" },
+      "UAA": { aa: "Stop", name: "终止密码子" },
+      "UAG": { aa: "Stop", name: "终止密码子" },
+      "UGA": { aa: "Stop", name: "终止密码子" },
+      "UGU": { aa: "Cys", name: "半胱氨酸" },
+      "UGC": { aa: "Cys", name: "半胱氨酸" },
+      "UGG": { aa: "Trp", name: "色氨酸" },
+      "CAU": { aa: "His", name: "组氨酸" },
+      "CAC": { aa: "His", name: "组氨酸" },
+      "CAA": { aa: "Gln", name: "谷氨酰胺" },
+      "CAG": { aa: "Gln", name: "谷氨酰胺" },
+      "AAU": { aa: "Asn", name: "天冬酰胺" },
+      "AAC": { aa: "Asn", name: "天冬酰胺" },
+      "AAA": { aa: "Lys", name: "赖氨酸" },
+      "AAG": { aa: "Lys", name: "赖氨酸" },
+      "GAU": { aa: "Asp", name: "天冬氨酸" },
+      "GAC": { aa: "Asp", name: "天冬氨酸" },
+      "GAA": { aa: "Glu", name: "谷氨酸" },
+      "GAG": { aa: "Glu", name: "谷氨酸" },
+      "CGU": { aa: "Arg", name: "精氨酸" },
+      "CGC": { aa: "Arg", name: "精氨酸" },
+      "CGA": { aa: "Arg", name: "精氨酸" },
+      "CGG": { aa: "Arg", name: "精氨酸" },
+      "AGA": { aa: "Arg", name: "精氨酸" },
+      "AGG": { aa: "Arg", name: "精氨酸" },
+      "GGU": { aa: "Gly", name: "甘氨酸" },
+      "GGC": { aa: "Gly", name: "甘氨酸" },
+      "GGA": { aa: "Gly", name: "甘氨酸" },
+      "GGG": { aa: "Gly", name: "甘氨酸" }
+    };
+
+    const BASE_COLORS = {
+      A: "#fb923c",
+      U: "#38bdf8",
+      G: "#34d399",
+      C: "#fbbf24"
+    };
+
+    const AA_COLORS = {
+      Phe: "#f97316",
+      Leu: "#22c55e",
+      Ile: "#22c55e",
+      Met: "#22c55e",
+      Val: "#22c55e",
+      Ser: "#0ea5e9",
+      Pro: "#6366f1",
+      Thr: "#0ea5e9",
+      Ala: "#4ade80",
+      Tyr: "#facc15",
+      Cys: "#a3e635",
+      Trp: "#6366f1",
+      His: "#a855f7",
+      Gln: "#06b6d4",
+      Asn: "#06b6d4",
+      Lys: "#3b82f6",
+      Asp: "#f97373",
+      Glu: "#fb7185",
+      Arg: "#8b5cf6",
+      Gly: "#22d3ee",
+      Stop: "#94a3b8"
+    };
+
+    function normalizeCodon(raw) {
+      if (!raw) return { ok: false, error: "请输入 3 个碱基。" };
+      let s = raw.trim().toUpperCase();
+      if (s.length !== 3) return { ok: false, error: "密码子长度必须为 3。" };
+      s = s.replace(/T/g, "U");
+      if (!/^[AUCG]{3}$/.test(s)) return { ok: false, error: "只允许 A / U / C / G（或含 T 的 DNA 密码子）。" };
+      return { ok: true, codon: s };
+    }
+
+    function complementRNA(base) {
+      switch (base) {
+        case "A": return "U";
+        case "U": return "A";
+        case "C": return "G";
+        case "G": return "C";
+        default: return "";
+      }
+    }
+
+    function rnaToDnaTemplate(codon) {
+      const map = { A: "T", U: "A", C: "G", G: "C" };
+      return codon.split("").map(b => map[b] || "_").join("");
+    }
+
+    function getSynonymousCodons(aaCode) {
+      return Object.entries(CODON_TABLE)
+        .filter(([c, info]) => info.aa === aaCode)
+        .map(([c]) => c)
+        .sort();
+    }
+
+    /* === 2. DOM 元素引用 === */
+    const slots = [
+      document.getElementById("slot-0"),
+      document.getElementById("slot-1"),
+      document.getElementById("slot-2")
+    ];
+    const errorMsg = document.getElementById("error-msg");
+    const resultCard = document.getElementById("result-card");
+    const resultGrid = document.getElementById("result-grid");
+    const resultSource = document.getElementById("result-source");
+    const codonInput = document.getElementById("codon-input");
+    const searchBtn = document.getElementById("search-btn");
+    const btnBackspace = document.getElementById("btn-backspace");
+    const btnClear = document.getElementById("btn-clear");
+
+    const activeLetters = [
+      document.getElementById("active-letter-0"),
+      document.getElementById("active-letter-1"),
+      document.getElementById("active-letter-2")
+    ];
+    const activeFrame = document.getElementById("active-frame");
+    const trnaWrapper = document.getElementById("trna-wrapper");
+    const aaCircle = document.getElementById("aa-circle");
+    const aaName = document.getElementById("aa-name");
+    const antiCells = [
+      document.getElementById("anti-cell-0"),
+      document.getElementById("anti-cell-1"),
+      document.getElementById("anti-cell-2")
+    ];
+    const anticodonText = document.getElementById("anticodon-text");
+    const peptideBeads = [
+      document.getElementById("pep-0"),
+      document.getElementById("pep-1"),
+      document.getElementById("pep-2"),
+      document.getElementById("pep-3"),
+      document.getElementById("pep-4"),
+      document.getElementById("pep-5"),
+      document.getElementById("pep-6")
+    ];
+
+    let currentCodon = [];
+    let startedTranslation = false;
+    let lastAAColor = null;
+    let lastAAText = "—";
+    let chainIndex = 0;
+
+    /* 初始化显示 */
+    function resetActiveFrame() {
+      activeFrame.classList.add("active-empty");
+      activeLetters.forEach(el => el.textContent = "_");
+    }
+    resetActiveFrame();
+
+    function updateSlots() {
+      for (let i = 0; i < 3; i++) {
+        slots[i].textContent = currentCodon[i] || "_";
+      }
+      if (currentCodon.length !== 3) {
+        resetActiveFrame();
+      }
+    }
+
+    /* === 3. 翻译动态区：更新并执行动画 === */
+    function animateTranslation(codon, info, anticodon) {
+      const bases = codon.split("");
+      // 更新 mRNA 发光框
+      activeFrame.classList.remove("active-empty");
+      bases.forEach((b, i) => {
+        activeLetters[i].textContent = b;
+        activeLetters[i].style.color = "#0f172a";
+        activeLetters[i].style.background = BASE_COLORS[b] || "#ffffff";
+        activeLetters[i].style.borderColor = BASE_COLORS[b] || "#22c55e";
+      });
+
+      // 更新反密码子文字 & 彩色方块（注意 3'→5' 顺序）
+      const antiArr = anticodon.split("");
+      anticodonText.textContent = "反密码子 3′→5′：" + antiArr.join(" ");
+      antiArr.forEach((b, i) => {
+        antiCells[i].textContent = b;
+        antiCells[i].style.background = BASE_COLORS[b] || "#e5e7eb";
+        antiCells[i].style.borderColor = BASE_COLORS[b] || "#cbd5e1";
+      });
+
+      // 更新 tRNA 顶端氨基酸球颜色和文字
+      const aaColor = AA_COLORS[info.aa] || "#22c55e";
+      if (info.aa === "Stop") {
+        aaName.textContent = "终止信号";
+      } else {
+        aaName.textContent = info.name + " (" + info.aa + ")";
+      }
+      aaCircle.style.borderColor = aaColor;
+      aaCircle.style.boxShadow = "0 0 0 3px " + aaColor + "33";
+
+      // 肽链逻辑：
+      // 第一次：只出现 tRNA，不加链；
+      // 之后每次新密码子：把上一次的氨基酸颜色固定到肽链，然后新 tRNA 飞过来。
+      if (!startedTranslation) {
+        startedTranslation = true;
+        lastAAColor = aaColor;
+        lastAAText = aaName.textContent;
+        trnaWrapper.style.opacity = 0;
+        trnaWrapper.classList.remove("active");
+        // 0.3s 后飞到配对位置
+        setTimeout(() => {
+          trnaWrapper.style.opacity = 1;
+          trnaWrapper.classList.add("active");
+          aaCircle.classList.remove("aa-pop");
+          void aaCircle.offsetWidth;
+          aaCircle.classList.add("aa-pop");
+        }, 300);
+        return;
+      }
+
+      // 把之前的氨基酸加入肽链
+      if (lastAAColor && chainIndex < peptideBeads.length) {
+        const bead = peptideBeads[chainIndex];
+        bead.style.backgroundColor = lastAAColor;
+        bead.style.borderColor = lastAAColor;
+        chainIndex++;
+      }
+
+      lastAAColor = aaColor;
+      lastAAText = aaName.textContent;
+
+      // 让 tRNA 回到起点再飞一次
+      trnaWrapper.classList.remove("active");
+      // 先瞬间回到右上（通过移除 active，再强制重绘）
+      void trnaWrapper.offsetWidth;
+      trnaWrapper.style.opacity = 0;
+      setTimeout(() => {
+        trnaWrapper.style.opacity = 1;
+        trnaWrapper.classList.add("active");
+        aaCircle.classList.remove("aa-pop");
+        void aaCircle.offsetWidth;
+        aaCircle.classList.add("aa-pop");
+      }, 300);
+    }
+
+    /* === 4. 结果卡片 === */
+    function showCodonInfo(codon, source) {
+      const info = CODON_TABLE[codon];
+      if (!info) {
+        errorMsg.textContent = "该密码子在当前标准遗传密码表中未找到。";
+        resultCard.style.display = "none";
+        return;
+      }
+
+      const aaCode = info.aa;
+      const synonymous = getSynonymousCodons(aaCode);
+      const degeneracy = synonymous.length;
+      const anticodon = codon.split("").map(complementRNA).reverse().join("");
+      const dnaTemplate = rnaToDnaTemplate(codon);
+
+      let degText;
+      if (aaCode === "Stop") {
+        degText = `共有 <strong>${degeneracy}</strong> 个终止密码子。`;
+      } else {
+        degText = `这种氨基酸共有 <strong>${degeneracy}</strong> 个不同密码子编码，本密码子是其中之一。`;
+      }
+
+      const noteText = info.note ? `<div><span class="label">备注：</span>${info.note}</div>` : "";
+
+      resultSource.textContent = source === "builder"
+        ? "RESULT · FROM CODON ASSEMBLY"
+        : "RESULT · FROM CODON QUERY";
+
+      resultGrid.innerHTML = `
+        <div>
+          <div><span class="label">mRNA 密码子 (5′→3′)：</span><code>${codon}</code></div>
+          <div><span class="label">氨基酸：</span>${info.name} (${aaCode})</div>
+          ${noteText}
+          <div style="margin-top:4px;"><span class="label">简并性：</span>${degText}</div>
+        </div>
+        <div>
+          <div><span class="label">同义密码子：</span>${synonymous.join(", ")}</div>
+          <div style="margin-top:4px;"><span class="label">tRNA 反密码子 (3′→5′)：</span><code>${anticodon}</code></div>
+          <div style="margin-top:4px;"><span class="label">DNA 模板链 (3′→5′)：</span><code>${dnaTemplate}</code></div>
+        </div>
+      `;
+      resultCard.style.display = "block";
+
+      // 同时更新上面的动态图
+      animateTranslation(codon, info, anticodon);
+    }
+
+    /* === 5. 交互事件：拼装区 === */
+    document.querySelectorAll(".base-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (currentCodon.length >= 3) return;
+        currentCodon.push(btn.dataset.base);
+        updateSlots();
+        errorMsg.textContent = "";
+        if (currentCodon.length === 3) {
+          const codon = currentCodon.join("");
+          showCodonInfo(codon, "builder");
+        }
+      });
+    });
+
+    btnBackspace.addEventListener("click", () => {
+      if (currentCodon.length > 0) {
+        currentCodon.pop();
+        updateSlots();
+      }
+    });
+
+    btnClear.addEventListener("click", () => {
+      currentCodon = [];
+      updateSlots();
+      errorMsg.textContent = "";
+      resultCard.style.display = "none";
+    });
+
+    /* === 6. 搜索区 === */
+    function handleSearch() {
+      const norm = normalizeCodon(codonInput.value);
+      if (!norm.ok) {
+        errorMsg.textContent = norm.error;
+        resultCard.style.display = "none";
+        return;
+      }
+      errorMsg.textContent = "";
+      codonInput.value = norm.codon;
+      showCodonInfo(norm.codon, "query");
+    }
+
+    searchBtn.addEventListener("click", handleSearch);
+    codonInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") handleSearch();
+    });
+
+    updateSlots();
+  </script>
 </body>
 </html>
