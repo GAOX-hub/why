@@ -94,7 +94,7 @@ header p {
     background: #0d9488;
 }
 
-/* ===== 密码子槽位 ===== */
+/* ===== 密码子槽位 + 查询按钮一行 ===== */
 .codon-display {
     display: flex;
     align-items: center;
@@ -113,11 +113,8 @@ header p {
     font-size: 28px;
     color: #065f46;
 }
-.builder-actions {
-    margin-top: 6px;
-}
 
-/* ===== 统一的主按钮样式（查询 & 设为原始密码子） ===== */
+/* 统一的主按钮样式（查询 & 设为原始密码子） */
 .primary-btn {
     padding: 8px 16px;
     border-radius: 999px;
@@ -127,12 +124,16 @@ header p {
     font-size: 15px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(14,165,233,0.4);
+    white-space: nowrap;
 }
 .primary-btn:hover {
     background: #0284c7;
 }
 
-/* 小辅助按钮 */
+/* 下方辅助按钮行 */
+.builder-actions {
+    margin-top: 6px;
+}
 .small-btn {
     padding: 6px 14px;
     border-radius: 14px;
@@ -155,10 +156,10 @@ header p {
     box-shadow: 0 12px 30px rgba(0,0,0,0.05);
 }
 
-/* —— 查询结果标题 —— */
+/* —— 查询结果标题：稍微缩小 —— */
 .result-title {
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;       /* ★ 原来 24px，改小一点 */
     font-weight: bold;
     margin-bottom: 18px;
     color: #0f172a;
@@ -174,11 +175,12 @@ header p {
     align-items: center;
 }
 
-/* 左侧标签列，统一宽度，保证答案左对齐 */
+/* 左侧标签列，统一宽度，禁止换行，保证整句在一行 */
 .result-label {
     width: 220px;
     flex-shrink: 0;
     color: #111827;
+    white-space: nowrap;   /* ★ 防止 “5′→3′” 等被拆行 */
 }
 
 /* ===== 标签样式 ===== */
@@ -276,7 +278,7 @@ header p {
     font-size: 14px;
     color: #4b5563;
     margin-top: 4px;
-    font-weight: 700;
+    font-weight: 700;       /* ★ 加粗 */
 }
 
 @media (max-width: 900px) {
@@ -603,18 +605,21 @@ window.addEventListener("DOMContentLoaded", () => {
             <button class="base-btn" onclick="addBase('C')">C</button>
         </div>
 
+        <!-- 三个格子 + mRNA 标记 + 查询按钮 在同一行 -->
         <div class="codon-display">
             <div id="s1" class="codon-slot"></div>
             <div id="s2" class="codon-slot"></div>
             <div id="s3" class="codon-slot"></div>
             <span style="font-size:15px; color:#64748b;">mRNA 5′→3′</span>
+
+            <!-- 占满剩余空间，把按钮推到最右边 -->
+            <div style="flex:1;"></div>
+            <button class="primary-btn" onclick="queryCodon()">查询</button>
         </div>
 
         <div class="builder-actions">
             <button class="small-btn" onclick="removeLast()">删除最后一位</button>
             <button class="small-btn" onclick="clearCodon()">清空密码子</button>
-            <!-- 查询按钮：使用和“设为原始密码子”一样的样式 -->
-            <button class="primary-btn" onclick="queryCodon()">查询</button>
         </div>
     </div>
 
@@ -670,14 +675,14 @@ window.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="result-line">
           <span class="result-label">原始氨基酸：</span>
-          <span id="orig-aa-tag" class="tag tag-aa"></span>
+          <span id="orig-aa-tag" class="tag"></span>
         </div>
       </div>
     </div>
 
     <!-- 右：修改碱基，观察突变 -->
     <div class="flex-item" id="mut-block" style="display:none;">
-      <div class="codon-select-row">
+      <div class="result-line codon-select-row">
         <span class="result-label">请选择突变：</span>
         <select id="pos1" class="codon-pos">
           <option>A</option><option>U</option><option>G</option><option>C</option>
@@ -697,7 +702,7 @@ window.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="result-line">
           <span class="result-label">突变后氨基酸：</span>
-          <span id="mut-aa-tag" class="tag tag-aa"></span>
+          <span id="mut-aa-tag" class="tag"></span>
         </div>
         <div class="result-line">
           <span class="result-label">突变类型：</span>
