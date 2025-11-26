@@ -159,7 +159,7 @@ header p {
 /* —— 查询结果标题：稍微缩小 —— */
 .result-title {
     text-align: center;
-    font-size: 20px;       /* ★ 原来 24px，改小一点 */
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 18px;
     color: #0f172a;
@@ -175,12 +175,12 @@ header p {
     align-items: center;
 }
 
-/* 左侧标签列，统一宽度，禁止换行，保证整句在一行 */
+/* 左侧标签列：去掉固定宽度，结果贴近标签 */
 .result-label {
-    width: 280px;
     flex-shrink: 0;
     color: #111827;
-    white-space: nowrap;   /* ★ 防止 “5′→3′” 等被拆行 */
+    white-space: nowrap;
+    margin-right: 8px;   /* 标签与结果之间小间距 */
 }
 
 /* ===== 标签样式 ===== */
@@ -192,6 +192,7 @@ header p {
     font-weight: 600;
     background: linear-gradient(135deg, #d7f3ff, #9be3ff);
     color: #075985;
+    margin-left: 0;      /* 贴近标签 */
 }
 
 /* ===== 突变模拟器部分 ===== */
@@ -233,13 +234,18 @@ header p {
     width: 140px;
     text-transform: uppercase;
 }
-.error {
+#error-msg {
     margin-top: 4px;
     font-size: 13px;
     color: #b91c1c;
 }
 .result-block {
     margin-top: 10px;
+}
+
+/* 让“设为原始密码子”按钮靠右 */
+#set-orig-btn {
+    margin-left: auto;
 }
 
 /* 突变下拉框 */
@@ -265,7 +271,7 @@ header p {
     border-radius: 999px;
     font-weight: 700;
     font-size: 15px;
-    margin-left: 8px;
+    margin-left: 0;
 }
 .mut-syn { background:#ecfeff; color:#0369a1; border:1px solid #7dd3fc; }
 .mut-mis { background:#fef3c7; color:#92400e; border:1px solid #facc15; }
@@ -278,7 +284,7 @@ header p {
     font-size: 14px;
     color: #4b5563;
     margin-top: 4px;
-    font-weight: 700;       /* ★ 加粗 */
+    font-weight: 700;
 }
 
 @media (max-width: 900px) {
@@ -290,7 +296,6 @@ header p {
 <script>
 /* ================= 顶部交互（拼装 + 查询）：支持完整 64 种密码子 ================= */
 
-/* 完整标准遗传密码表（RNA） */
 const CODON_TABLE = {
   "UUU": { aa: "Phe", name: "苯丙氨酸" },
   "UUC": { aa: "Phe", name: "苯丙氨酸" },
@@ -574,7 +579,6 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("pos2").addEventListener("change", updateMutation);
   document.getElementById("pos3").addEventListener("change", updateMutation);
 
-  // 下方突变区默认隐藏（没输入前不显示）
   document.getElementById("mut-block").style.display = "none";
 });
 </script>
@@ -605,16 +609,15 @@ window.addEventListener("DOMContentLoaded", () => {
             <button class="base-btn" onclick="addBase('C')">C</button>
         </div>
 
-        <!-- 三个格子 + mRNA 标记 + 查询按钮 在同一行 -->
+        <!-- 三个格子 + mRNA 标记 + 查询按钮 -->
         <div class="codon-display">
             <div id="s1" class="codon-slot"></div>
             <div id="s2" class="codon-slot"></div>
             <div id="s3" class="codon-slot"></div>
             <span style="font-size:15px; color:#64748b;">mRNA 5′→3′</span>
 
-            <!-- 占满剩余空间，把按钮推到最右边 -->
-            <div style="flex:1;"></div>
-            <button class="primary-btn" onclick="queryCodon()">查询</button>
+            <!-- 查询按钮左移：去掉 flex:1 占位，只给一点 margin-left -->
+            <button class="primary-btn" onclick="queryCodon()" style="margin-left:20px;">查询</button>
         </div>
 
         <div class="builder-actions">
@@ -666,7 +669,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <input id="orig-input" type="text" maxlength="3" placeholder="例如 AUG">
         <button id="set-orig-btn" class="primary-btn">设为原始密码子</button>
       </div>
-      <div id="error-msg" class="error"></div>
+      <div id="error-msg"></div>
 
       <div id="orig-info" class="result-block" style="display:none;">
         <div class="result-line">
@@ -719,4 +722,3 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
