@@ -116,6 +116,23 @@ header p {
 .builder-actions {
     margin-top: 6px;
 }
+
+/* ===== 统一的主按钮样式（查询 & 设为原始密码子） ===== */
+.primary-btn {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    background: #0ea5e9;
+    color: #ecfeff;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(14,165,233,0.4);
+}
+.primary-btn:hover {
+    background: #0284c7;
+}
+
+/* 小辅助按钮 */
 .small-btn {
     padding: 6px 14px;
     border-radius: 14px;
@@ -147,11 +164,21 @@ header p {
     color: #0f172a;
 }
 
-/* —— 结果文本 —— */
-.result-text {
+/* —— 结果文本、突变文本（两列左对齐） —— */
+.result-text,
+.result-line {
     font-size: 18px;
-    margin: 10px 0;
+    margin: 8px 0;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+/* 左侧标签列，统一宽度，保证答案左对齐 */
+.result-label {
+    width: 220px;
+    flex-shrink: 0;
+    color: #111827;
 }
 
 /* ===== 标签样式 ===== */
@@ -163,7 +190,6 @@ header p {
     font-weight: 600;
     background: linear-gradient(135deg, #d7f3ff, #9be3ff);
     color: #075985;
-    margin-left: 10px;
 }
 
 /* ===== 突变模拟器部分 ===== */
@@ -205,16 +231,6 @@ header p {
     width: 140px;
     text-transform: uppercase;
 }
-#set-orig-btn {
-    padding: 8px 16px;
-    border-radius: 999px;
-    border: none;
-    background: #0ea5e9;
-    color: #ecfeff;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(14,165,233,0.4);
-}
 .error {
     margin-top: 4px;
     font-size: 13px;
@@ -222,18 +238,6 @@ header p {
 }
 .result-block {
     margin-top: 10px;
-}
-.result-line {
-    font-size: 16px;
-    margin: 6px 0;
-}
-.label-strong {
-    font-weight: 700;
-    color: #111827;
-}
-.tag-aa {
-    background: linear-gradient(135deg,#dcfce7,#bbf7d0);
-    color: #166534;
 }
 
 /* 突变下拉框 */
@@ -266,10 +270,13 @@ header p {
 .mut-non { background:#fee2e2; color:#b91c1c; border:1px solid #fca5a5; }
 .mut-stoploss { background:#ede9fe; color:#5b21b6; border:1px solid #c4b5fd; }
 .mut-none { background:#e5e7eb; color:#374151; border:1px solid #d1d5db; }
+
+/* 突变说明：加粗 */
 .mut-desc {
     font-size: 14px;
     color: #4b5563;
     margin-top: 4px;
+    font-weight: 700;
 }
 
 @media (max-width: 900px) {
@@ -526,11 +533,12 @@ function updateMutation() {
 
   if (mutCodon === originalCodon) {
     typeText = "未发生突变";
+    typeClass = "mut-none";
     descText = "密码子与原始相同，氨基酸不变。";
   } else if (!origInfo.isStop && mutInfo.isStop) {
     typeText = "无义突变";
     typeClass = "mut-non";
-    descText = "变为终止密码子，提前终止翻译。";
+    descText = "突变后变成终止密码子，提前终止翻译。";
   } else if (origInfo.isStop && !mutInfo.isStop) {
     typeText = "终止丢失";
     typeClass = "mut-stoploss";
@@ -585,7 +593,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     <!-- 左：拼装密码子 -->
     <div class="card">
-        <h2>① 拼装密码子</h2>
+        <h2>拼装密码子</h2>
         <p class="hint">依次点击 A / U / G / C，构建一个 mRNA 三联体密码子（5′→3′）。</p>
 
         <div class="bases">
@@ -605,7 +613,8 @@ window.addEventListener("DOMContentLoaded", () => {
         <div class="builder-actions">
             <button class="small-btn" onclick="removeLast()">删除最后一位</button>
             <button class="small-btn" onclick="clearCodon()">清空密码子</button>
-            <button class="small-btn" onclick="queryCodon()">查询</button>
+            <!-- 查询按钮：使用和“设为原始密码子”一样的样式 -->
+            <button class="primary-btn" onclick="queryCodon()">查询</button>
         </div>
     </div>
 
@@ -614,27 +623,27 @@ window.addEventListener("DOMContentLoaded", () => {
         <h2 class="result-title">查询结果</h2>
 
         <div class="result-text">
-            mRNA 密码子（5′→3′）：
-            <span id="mRNA_show" class="tag">_ _ _</span>
-        </div>
-
-        <div class="result-text">
-            氨基酸：
-            <span id="aa_show" class="tag">—</span>
-        </div>
-
-        <div class="result-text">
-            tRNA 反密码子（3′→5′）：
-            <span id="tRNA_show" class="tag">—</span>
-        </div>
-
-        <div class="result-text">
-            DNA 模板链（3′→5′）：
+            <span class="result-label">DNA 模板链（3′→5′）：</span>
             <span id="DNA_show" class="tag">—</span>
         </div>
 
         <div class="result-text">
-            同义密码子：
+            <span class="result-label">mRNA 密码子（5′→3′）：</span>
+            <span id="mRNA_show" class="tag">—</span>
+        </div>
+
+        <div class="result-text">
+            <span class="result-label">tRNA 反密码子（3′→5′）：</span>
+            <span id="tRNA_show" class="tag">—</span>
+        </div>
+
+        <div class="result-text">
+            <span class="result-label">氨基酸：</span>
+            <span id="aa_show" class="tag">—</span>
+        </div>
+
+        <div class="result-text">
+            <span class="result-label">同义密码子：</span>
             <span id="synonym_show" class="tag">—</span>
         </div>
     </div>
@@ -650,17 +659,17 @@ window.addEventListener("DOMContentLoaded", () => {
     <div class="flex-item">
       <div class="orig-input-row">
         <input id="orig-input" type="text" maxlength="3" placeholder="例如 AUG">
-        <button id="set-orig-btn">设为原始密码子</button>
+        <button id="set-orig-btn" class="primary-btn">设为原始密码子</button>
       </div>
       <div id="error-msg" class="error"></div>
 
       <div id="orig-info" class="result-block" style="display:none;">
         <div class="result-line">
-          <span class="label-strong">原始密码子：</span>
+          <span class="result-label">原始密码子：</span>
           <span id="orig-codon-tag" class="tag"></span>
         </div>
         <div class="result-line">
-          <span class="label-strong">原始氨基酸：</span>
+          <span class="result-label">原始氨基酸：</span>
           <span id="orig-aa-tag" class="tag tag-aa"></span>
         </div>
       </div>
@@ -669,7 +678,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <!-- 右：修改碱基，观察突变 -->
     <div class="flex-item" id="mut-block" style="display:none;">
       <div class="codon-select-row">
-        <span class="label-strong">突变后密码子：</span>
+        <span class="result-label">请选择突变：</span>
         <select id="pos1" class="codon-pos">
           <option>A</option><option>U</option><option>G</option><option>C</option>
         </select>
@@ -683,15 +692,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
       <div id="mut-info" class="result-block" style="display:none;">
         <div class="result-line">
-          <span class="label-strong">突变后密码子：</span>
+          <span class="result-label">突变后密码子：</span>
           <span id="mut-codon-tag" class="tag"></span>
         </div>
         <div class="result-line">
-          <span class="label-strong">突变后氨基酸：</span>
+          <span class="result-label">突变后氨基酸：</span>
           <span id="mut-aa-tag" class="tag tag-aa"></span>
         </div>
         <div class="result-line">
-          <span class="label-strong">突变类型：</span>
+          <span class="result-label">突变类型：</span>
           <span id="mut-type-tag" class="mut-type mut-none">—</span>
         </div>
         <div id="mut-desc" class="mut-desc"></div>
