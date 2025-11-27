@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>遗传密码子交互实验台</title>
 
 <style>
@@ -15,14 +16,16 @@ body {
 
 .page-outer {
     max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 24px;
+    width: 100%;
+    margin: 0 auto;
+    padding: min(4vw, 30px) min(4vw, 24px);
+    box-sizing: border-box;
 }
 
 .page-wrap {
     background: #ffffff;
-    border-radius: 28px;
-    padding: 28px 32px 40px;
+    border-radius: 2vw;
+    padding: min(3vw, 28px) min(3vw, 32px) min(4vw, 40px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
@@ -33,13 +36,13 @@ header {
 }
 header h1 {
     margin: 0;
-    font-size: 34px;
+    font-size: clamp(22px, 3.2vw, 34px);
     font-weight: 800;
     color: #0a3d62;
 }
 header p {
     margin-top: 6px;
-    font-size: 15px;
+    font-size: clamp(13px, 1.6vw, 15px);
     color: #6b7280;
 }
 
@@ -63,12 +66,19 @@ header p {
 /* 左右两块内部标题 */
 .top-left h2,
 .top-right h2 {
-    font-size: 22px;
+    font-size: clamp(18px, 2.2vw, 22px);
     margin: 0 0 10px;
     color: #064e3b;
 }
+.mut-title {
+    text-align: left;
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-weight: 700;
+    color: #064e3b;
+    margin: 0 0 16px;
+}
 .hint {
-    font-size: 15px;
+    font-size: clamp(13px, 1.7vw, 15px);
     color: #64748b;
     margin-bottom: 14px;
 }
@@ -82,13 +92,13 @@ header p {
 }
 
 .base-btn {
-    min-width: 48px;
+    min-width: clamp(40px, 8vw, 48px);
     padding: 8px 14px;
     border-radius: 999px;
     border: none;
     background: #14b8a6;
     color: white;
-    font-size: 20px;
+    font-size: clamp(16px, 2.4vw, 20px);
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(20,184,166,.35);
 }
@@ -102,17 +112,18 @@ header p {
     align-items: center;
     gap: 10px;
     margin-bottom: 12px;
+    flex-wrap: nowrap;
 }
 .codon-slot {
-    width: 50px;
-    height: 50px;
+    width: clamp(38px, 6vw, 50px);
+    height: clamp(38px, 6vw, 50px);
     border-radius: 12px;
     border: 2px solid #a7f3d0;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #f0fdfa;
-    font-size: 28px;
+    font-size: clamp(20px, 3vw, 28px);
     color: #065f46;
 }
 
@@ -123,7 +134,7 @@ header p {
     border: none;
     background: #0ea5e9;
     color: #ecfeff;
-    font-size: 15px;
+    font-size: clamp(13px, 1.8vw, 15px);
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(14,165,233,0.4);
     white-space: nowrap;
@@ -151,22 +162,16 @@ header p {
 /* ===== 查询结果（顶卡右侧） ===== */
 .result-title {
     text-align: left;
-    font-size: 20px;
+    font-size: clamp(18px, 2.2vw, 20px);
     font-weight: bold;
     margin-bottom: 18px;
     color: #0f172a;
 }
 
-/* 突变结果标题：与查询结果一致，只微调间距 */
-.mut-result-title {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
 /* —— 结果文本、突变文本（两列左对齐） —— */
 .result-text,
 .result-line {
-    font-size: 18px;
+    font-size: clamp(14px, 1.8vw, 18px);
     margin: 8px 0;
     font-weight: 600;
     display: flex;
@@ -186,7 +191,7 @@ header p {
     display: inline-block;
     padding: 6px 16px;
     border-radius: 12px;
-    font-size: 18px;
+    font-size: clamp(14px, 1.8vw, 18px);
     font-weight: 600;
     background: linear-gradient(135deg, #d7f3ff, #9be3ff);
     color: #075985;
@@ -202,13 +207,7 @@ header p {
     box-shadow: 0 12px 30px rgba(0,0,0,0.05);
     margin-top: 10px;
 }
-.mut-title {
-    text-align: left;
-    font-size: 22px;
-    font-weight: 700;
-    color: #064e3b;
-    margin: 0 0 16px;
-}
+
 .flex-row {
     display: flex;
     flex-wrap: wrap;
@@ -218,11 +217,10 @@ header p {
     flex: 1 1 320px;
 }
 
-/* 右边这一列整体往右移一点，与上面查询结果列对齐 */
+/* 右边这一列整体往右移一点，与上面查询结果列对齐（大屏有效） */
 .mut-right {
-  padding-left: 80px;        /* 数值越大越往右，你可以根据实际再微调 */
-
-    margin-top: -4px;          /* 负值 = 往上挪；太高就改小一点，比如 -2px */
+    padding-left: 80px;
+    margin-top: -4px;
 }
 
 .orig-input-row {
@@ -292,10 +290,36 @@ header p {
     font-weight: 700;
 }
 
+/* ===== 响应式：中小屏调整 ===== */
 @media (max-width: 900px) {
-    .top-card { grid-template-columns: 1fr; }
-    .flex-row { flex-direction: column; }
-    .mut-right { padding-left: 0; }   /* 小屏时取消右移，防止太挤 */
+    .top-card {
+        grid-template-columns: 1fr;
+        padding: 18px;
+        gap: 18px;
+    }
+    .flex-row {
+        flex-direction: column;
+    }
+    .mut-right {
+        padding-left: 0;
+        margin-top: 0;
+    }
+    .codon-display {
+        flex-wrap: wrap;
+    }
+    .primary-btn[onclick="queryCodon()"] {
+        margin-left: 0 !important;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .page-outer {
+        padding: 12px;
+    }
+    .bases {
+        justify-content: center;
+    }
 }
 </style>
 
@@ -446,7 +470,6 @@ function queryCodon() {
     const dnaTemplate = rnaToDnaTemplate(input);
 
     const synList = getSynonymousCodons(info.aa);
-    // 同义密码子用“、”隔开
     const synText = synList.length ? synList.join("、") : input;
 
     document.getElementById("mRNA_show").innerText = input;
@@ -508,10 +531,8 @@ function setOriginal() {
   document.getElementById("orig-aa-tag").textContent = info.label;
   origInfoBlock.style.display = "block";
 
-  // 显示下拉框和结果区
   document.getElementById("mut-block").style.display = "block";
 
-  // 同步下拉框为当前原始密码子
   document.getElementById("pos1").value = originalCodon[0];
   document.getElementById("pos2").value = originalCodon[1];
   document.getElementById("pos3").value = originalCodon[2];
@@ -594,7 +615,6 @@ window.addEventListener("DOMContentLoaded", () => {
 </head>
 
 <body>
-
 <div class="page-outer">
 <div class="page-wrap">
 
@@ -691,9 +711,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     <!-- 右：请选择突变 + 突变结果 -->
     <div class="flex-item mut-right" id="mut-block" style="display:none;">
-      <!-- 突变结果标题，与“查询结果”同样样式 -->
 
-      <!-- 请选择突变行 -->
       <div class="result-line codon-select-row">
         <span class="result-label">请选择突变：</span>
         <select id="pos1" class="codon-pos">
@@ -729,8 +747,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </div>
 </div>
-
 </body>
 </html>
-
-
