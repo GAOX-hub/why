@@ -157,7 +157,7 @@ header p {
     color: #0f172a;
 }
 
-/* 突变结果标题稍微靠上，和上面的风格一致 */
+/* 突变结果标题：与查询结果一致，只微调间距 */
 .mut-result-title {
     margin-top: 0;
     margin-bottom: 10px;
@@ -216,6 +216,11 @@ header p {
 }
 .flex-item {
     flex: 1 1 320px;
+}
+
+/* 右边这一列整体往右移一点，与上面查询结果列对齐 */
+.mut-right {
+    padding-left: 40px;
 }
 
 .orig-input-row {
@@ -288,6 +293,7 @@ header p {
 @media (max-width: 900px) {
     .top-card { grid-template-columns: 1fr; }
     .flex-row { flex-direction: column; }
+    .mut-right { padding-left: 0; }   /* 小屏时取消右移，防止太挤 */
 }
 </style>
 
@@ -681,8 +687,12 @@ window.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
 
-    <!-- 右：修改碱基，观察突变 -->
-    <div class="flex-item" id="mut-block" style="display:none;">
+    <!-- 右：请选择突变 + 突变结果 -->
+    <div class="flex-item mut-right" id="mut-block" style="display:none;">
+      <!-- 突变结果标题，与“查询结果”同样样式 -->
+      <h2 class="result-title mut-result-title">突变结果</h2>
+
+      <!-- 请选择突变行 -->
       <div class="result-line codon-select-row">
         <span class="result-label">请选择突变：</span>
         <select id="pos1" class="codon-pos">
@@ -696,9 +706,7 @@ window.addEventListener("DOMContentLoaded", () => {
         </select>
       </div>
 
-      <!-- 新增：突变结果小标题 -->
-      <h3 class="result-title mut-result-title">突变结果</h3>
-
+      <!-- 突变结果内容 -->
       <div id="mut-info" class="result-block" style="display:none;">
         <div class="result-line">
           <span class="result-label">突变后密码子：</span>
