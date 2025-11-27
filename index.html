@@ -600,7 +600,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <!-- 左：拼装密码子 -->
     <div class="card">
         <h2>拼装密码子</h2>
-        <p class="hint">依次点击 A / U / G / C，构建一个 mRNA 三联体密码子（5′→3′）。</p>
+        <p class="hint">选择 A / U / G / C，构建一个 mRNA 三联体密码子（5′→3′）。</p>
 
         <div class="bases">
             <button class="base-btn" onclick="addBase('A')">A</button>
@@ -614,15 +614,15 @@ window.addEventListener("DOMContentLoaded", () => {
             <div id="s1" class="codon-slot"></div>
             <div id="s2" class="codon-slot"></div>
             <div id="s3" class="codon-slot"></div>
-            <span style="font-size:15px; color:#64748b;">mRNA 5′→3′</span>
+            <span style="font-size:15px; color:#64748b;">mRNA （5′→3′）</span>
 
             <!-- 查询按钮左移：去掉 flex:1 占位，只给一点 margin-left -->
             <button class="primary-btn" onclick="queryCodon()" style="margin-left:20px;">查询</button>
         </div>
 
         <div class="builder-actions">
-            <button class="small-btn" onclick="removeLast()">删除最后一位</button>
-            <button class="small-btn" onclick="clearCodon()">清空密码子</button>
+            <button class="small-btn" onclick="removeLast()">撤回</button>
+            <button class="small-btn" onclick="clearCodon()">清空</button>
         </div>
     </div>
 
@@ -660,7 +660,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 <!-- ===== 下方：密码子突变模拟器 ===== -->
 <div class="mut-card">
-  <h2 class="mut-title">密码子突变模拟器</h2>
+  <h2 class="mut-title">突变密码子模拟</h2>
 
   <div class="flex-row">
     <!-- 左：输入原始密码子 -->
@@ -722,4 +722,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
