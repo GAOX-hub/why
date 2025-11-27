@@ -6,26 +6,37 @@
 <title>遗传密码子交互实验台</title>
 
 <style>
-/* ===== 页面基础 ===== */
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;  /* 不出现滚动条 */
+    background: #e6f6ff;
     font-family: "Microsoft YaHei", sans-serif;
-    background: #e6f6ff;   /* 浅蓝背景 */
     color: #1f2937;
 }
 
-.page-outer {
-    max-width: 1300px;
-    width: 100%;
+/* 这个根容器会按固定设计尺寸布局，然后整体缩放 */
+#scale-root {
+    width: 1300px;          /* 设计宽度 */
     margin: 0 auto;
-    padding: min(4vw, 30px) min(4vw, 24px);
-    box-sizing: border-box;
+    transform-origin: top left;
+    position: absolute;     /* 方便在窗口里居中 */
+    top: 0;
+    left: 0;
 }
 
+/* ===== 页面结构 ===== */
+.page-outer {
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
 .page-wrap {
     background: #ffffff;
-    border-radius: 2vw;
-    padding: min(3vw, 28px) min(3vw, 32px) min(4vw, 40px);
+    border-radius: 28px;
+    padding: 28px 32px 40px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
@@ -36,13 +47,13 @@ header {
 }
 header h1 {
     margin: 0;
-    font-size: clamp(22px, 3.2vw, 34px);
+    font-size: 34px;
     font-weight: 800;
     color: #0a3d62;
 }
 header p {
     margin-top: 6px;
-    font-size: clamp(13px, 1.6vw, 15px);
+    font-size: 15px;
     color: #6b7280;
 }
 
@@ -65,20 +76,14 @@ header p {
 
 /* 左右两块内部标题 */
 .top-left h2,
-.top-right h2 {
-    font-size: clamp(18px, 2.2vw, 22px);
+.top-right h2,
+.mut-title {
+    font-size: 22px;
     margin: 0 0 10px;
     color: #064e3b;
 }
-.mut-title {
-    text-align: left;
-    font-size: clamp(18px, 2.2vw, 22px);
-    font-weight: 700;
-    color: #064e3b;
-    margin: 0 0 16px;
-}
 .hint {
-    font-size: clamp(13px, 1.7vw, 15px);
+    font-size: 15px;
     color: #64748b;
     margin-bottom: 14px;
 }
@@ -90,15 +95,14 @@ header p {
     flex-wrap: wrap;
     margin-bottom: 14px;
 }
-
 .base-btn {
-    min-width: clamp(40px, 8vw, 48px);
+    min-width: 48px;
     padding: 8px 14px;
     border-radius: 999px;
     border: none;
     background: #14b8a6;
     color: white;
-    font-size: clamp(16px, 2.4vw, 20px);
+    font-size: 20px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(20,184,166,.35);
 }
@@ -112,18 +116,17 @@ header p {
     align-items: center;
     gap: 10px;
     margin-bottom: 12px;
-    flex-wrap: nowrap;
 }
 .codon-slot {
-    width: clamp(38px, 6vw, 50px);
-    height: clamp(38px, 6vw, 50px);
+    width: 50px;
+    height: 50px;
     border-radius: 12px;
     border: 2px solid #a7f3d0;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #f0fdfa;
-    font-size: clamp(20px, 3vw, 28px);
+    font-size: 28px;
     color: #065f46;
 }
 
@@ -134,7 +137,7 @@ header p {
     border: none;
     background: #0ea5e9;
     color: #ecfeff;
-    font-size: clamp(13px, 1.8vw, 15px);
+    font-size: 15px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(14,165,233,0.4);
     white-space: nowrap;
@@ -162,7 +165,7 @@ header p {
 /* ===== 查询结果（顶卡右侧） ===== */
 .result-title {
     text-align: left;
-    font-size: clamp(18px, 2.2vw, 20px);
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 18px;
     color: #0f172a;
@@ -171,7 +174,7 @@ header p {
 /* —— 结果文本、突变文本（两列左对齐） —— */
 .result-text,
 .result-line {
-    font-size: clamp(14px, 1.8vw, 18px);
+    font-size: 18px;
     margin: 8px 0;
     font-weight: 600;
     display: flex;
@@ -191,7 +194,7 @@ header p {
     display: inline-block;
     padding: 6px 16px;
     border-radius: 12px;
-    font-size: clamp(14px, 1.8vw, 18px);
+    font-size: 18px;
     font-weight: 600;
     background: linear-gradient(135deg, #d7f3ff, #9be3ff);
     color: #075985;
@@ -200,14 +203,16 @@ header p {
 
 /* ===== 突变模拟器部分 ===== */
 .mut-card {
-    background: #f0fbff;             /* 浅蓝色 */
+    background: #f0fbff;
     border-radius: 24px;
     padding: 18px 26px 28px;
     border: 1px solid #dbeafe;
     box-shadow: 0 12px 30px rgba(0,0,0,0.05);
     margin-top: 10px;
 }
-
+.mut-title {
+    text-align: left;
+}
 .flex-row {
     display: flex;
     flex-wrap: wrap;
@@ -217,7 +222,7 @@ header p {
     flex: 1 1 320px;
 }
 
-/* 右边这一列整体往右移一点，与上面查询结果列对齐（大屏有效） */
+/* 右边这一列整体往右移一点，与上面查询结果列对齐 */
 .mut-right {
     padding-left: 80px;
     margin-top: -4px;
@@ -243,7 +248,7 @@ header p {
     color: #b91c1c;
 }
 .result-block {
-    margin-top: 4px;   /* 往上收一点，让答案更靠上 */
+    margin-top: 4px;
 }
 
 /* 设为原始密码子：稍微右移一点 */
@@ -282,7 +287,6 @@ header p {
 .mut-stoploss { background:#ede9fe; color:#5b21b6; border:1px solid #c4b5fd; }
 .mut-none { background:#e5e7eb; color:#374151; border:1px solid #d1d5db; }
 
-/* 突变说明：加粗 */
 .mut-desc {
     font-size: 14px;
     color: #4b5563;
@@ -290,12 +294,10 @@ header p {
     font-weight: 700;
 }
 
-/* ===== 响应式：中小屏调整 ===== */
+/* 小屏时：布局改成一列，避免太挤（缩放前的备份，缩放后也能保持美观） */
 @media (max-width: 900px) {
     .top-card {
         grid-template-columns: 1fr;
-        padding: 18px;
-        gap: 18px;
     }
     .flex-row {
         flex-direction: column;
@@ -304,26 +306,46 @@ header p {
         padding-left: 0;
         margin-top: 0;
     }
-    .codon-display {
-        flex-wrap: wrap;
-    }
-    .primary-btn[onclick="queryCodon()"] {
-        margin-left: 0 !important;
-        margin-top: 8px;
-    }
-}
-
-@media (max-width: 600px) {
-    .page-outer {
-        padding: 12px;
-    }
-    .bases {
-        justify-content: center;
-    }
 }
 </style>
 
 <script>
+/* ================= 自动缩放：根据窗口大小整体等比缩放 ================= */
+(function () {
+  const BASE_WIDTH = 1300; // 设计宽度
+  let baseHeight = null;
+
+  function updateScale() {
+    const root = document.getElementById('scale-root');
+    if (!root) return;
+
+    // 第一次测量原始高度
+    if (!baseHeight) {
+      // 先取消缩放测一次自然高度
+      root.style.transform = 'scale(1)';
+      baseHeight = root.offsetHeight || 800;
+    }
+
+    const scaleX = window.innerWidth / BASE_WIDTH;
+    const scaleY = window.innerHeight / baseHeight;
+    const scale = Math.min(scaleX, scaleY);
+
+    root.style.transform = 'scale(' + scale + ')';
+
+    // 让内容在水平方向居中
+    const scaledWidth = BASE_WIDTH * scale;
+    const left = (window.innerWidth - scaledWidth) / 2;
+    root.style.left = (left > 0 ? left : 0) + 'px';
+    root.style.top = '0px';
+  }
+
+  window.addEventListener('load', updateScale);
+  window.addEventListener('resize', updateScale);
+
+  // 暴露给后面如果想在内容变化后手动刷新（这里先不用）
+  window.__updateCodonScale = updateScale;
+})();
+
 /* ================= 顶部交互（拼装 + 查询）：支持完整 64 种密码子 ================= */
 
 const CODON_TABLE = {
@@ -487,7 +509,7 @@ function normalizeCodon(raw) {
   if (!raw) return { ok: false, error: "请输入 3 个碱基。" };
   let s = raw.trim().toUpperCase();
   if (s.length !== 3) return { ok: false, error: "密码子长度必须为 3。" };
-  s = s.replace(/T/g, "U"); // DNA 中 T 当作 U
+  s = s.replace(/T/g, "U");
   if (!/^[AUCG]{3}$/.test(s)) return { ok: false, error: "只允许 A/U/C/G（或含 T 的 DNA 密码子）。" };
   return { ok: true, codon: s };
 }
@@ -608,15 +630,14 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("pos1").addEventListener("change", updateMutation);
   document.getElementById("pos2").addEventListener("change", updateMutation);
   document.getElementById("pos3").addEventListener("change", updateMutation);
-
-  document.getElementById("mut-block").style.display = "none";
 });
 </script>
 </head>
 
 <body>
-<div class="page-outer">
-<div class="page-wrap">
+<div id="scale-root">
+  <div class="page-outer">
+    <div class="page-wrap">
 
 <header>
     <h1>遗传密码子交互实验台</h1>
@@ -711,7 +732,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     <!-- 右：请选择突变 + 突变结果 -->
     <div class="flex-item mut-right" id="mut-block" style="display:none;">
-
       <div class="result-line codon-select-row">
         <span class="result-label">请选择突变：</span>
         <select id="pos1" class="codon-pos">
@@ -725,7 +745,6 @@ window.addEventListener("DOMContentLoaded", () => {
         </select>
       </div>
 
-      <!-- 突变结果内容 -->
       <div id="mut-info" class="result-block" style="display:none;">
         <div class="result-line">
           <span class="result-label">突变后密码子：</span>
@@ -745,7 +764,8 @@ window.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
-</div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
