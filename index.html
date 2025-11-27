@@ -157,6 +157,12 @@ header p {
     color: #0f172a;
 }
 
+/* 突变结果标题稍微靠上，和上面的风格一致 */
+.mut-result-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
 /* —— 结果文本、突变文本（两列左对齐） —— */
 .result-text,
 .result-line {
@@ -232,7 +238,7 @@ header p {
     color: #b91c1c;
 }
 .result-block {
-    margin-top: 10px;
+    margin-top: 4px;   /* 往上收一点，让答案更靠上 */
 }
 
 /* 设为原始密码子：稍微右移一点 */
@@ -432,7 +438,7 @@ function queryCodon() {
     const dnaTemplate = rnaToDnaTemplate(input);
 
     const synList = getSynonymousCodons(info.aa);
-    // 1. 同义密码子用“、”隔开
+    // 同义密码子用“、”隔开
     const synText = synList.length ? synList.join("、") : input;
 
     document.getElementById("mRNA_show").innerText = input;
@@ -558,7 +564,6 @@ function updateMutation() {
     if (originalCodon[i] !== mutCodon[i]) diffs.push(i + 1);
   }
   if (diffs.length > 0) {
-    // 2. 变化位置用“第一位、第二位”并用“、”分隔
     const posName = {1: "第一位", 2: "第二位", 3: "第三位"};
     const diffNames = diffs.map(i => posName[i] || `第${i}位`);
     descText += `（变化位置：${diffNames.join("、")}）`;
@@ -651,7 +656,7 @@ window.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
-<!-- ===== 下方：密码子突变模拟器 ===== -->
+<!-- ===== 下方：密码子突变模拟 ===== -->
 <div class="mut-card">
   <h2 class="mut-title">突变密码子模拟</h2>
 
@@ -691,6 +696,9 @@ window.addEventListener("DOMContentLoaded", () => {
         </select>
       </div>
 
+      <!-- 新增：突变结果小标题 -->
+      <h3 class="result-title mut-result-title">突变结果</h3>
+
       <div id="mut-info" class="result-block" style="display:none;">
         <div class="result-line">
           <span class="result-label">突变后密码子：</span>
@@ -715,4 +723,3 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
