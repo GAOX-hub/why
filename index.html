@@ -43,24 +43,26 @@ header p {
     color: #6b7280;
 }
 
-/* ===== 上部两块布局：左拼装，右结果 ===== */
+/* ===== 顶部整体卡片（拼装 + 结果合并） ===== */
 .layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 26px;
     margin-bottom: 26px;
 }
 
-.card {
+.top-card {
     background: #f9fefe;
     border: 1px solid #e0f2f1;
     border-radius: 24px;
     padding: 24px 26px 28px;
-    min-height: 260px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 26px;
 }
 
-.card h2 {
+/* 左右两块内部标题 */
+.top-left h2,
+.top-right h2 {
     font-size: 22px;
     margin: 0 0 10px;
     color: #064e3b;
@@ -146,19 +148,9 @@ header p {
     background: #f3f4f6;
 }
 
-/* ===== 查询结果（右侧卡片） ===== */
-.result-card {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 24px 26px 28px;
-    border: 1px solid #e2e8f0;
-    min-height: 260px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-}
-
-/* —— 查询结果标题：稍微缩小 —— */
+/* ===== 查询结果（顶卡右侧） ===== */
 .result-title {
-    text-align: center;
+    text-align: left;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 18px;
@@ -175,12 +167,12 @@ header p {
     align-items: center;
 }
 
-/* 左侧标签列：去掉固定宽度，结果贴近标签 */
+/* 左侧标签列：结果贴近标签 */
 .result-label {
     flex-shrink: 0;
     color: #111827;
     white-space: nowrap;
-    margin-right: 8px;   /* 标签与结果之间小间距 */
+    margin-right: 8px;
 }
 
 /* ===== 标签样式 ===== */
@@ -192,15 +184,15 @@ header p {
     font-weight: 600;
     background: linear-gradient(135deg, #d7f3ff, #9be3ff);
     color: #075985;
-    margin-left: 0;      /* 贴近标签 */
+    margin-left: 0;
 }
 
 /* ===== 突变模拟器部分 ===== */
 .mut-card {
-    background: #ffffff;
+    background: #f0fbff;             /* 浅蓝色 */
     border-radius: 24px;
     padding: 24px 26px 28px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #dbeafe;
     box-shadow: 0 12px 30px rgba(0,0,0,0.05);
     margin-top: 10px;
 }
@@ -243,9 +235,9 @@ header p {
     margin-top: 10px;
 }
 
-/* 让“设为原始密码子”按钮靠右 */
+/* 设为原始密码子：稍微右移一点 */
 #set-orig-btn {
-      margin-left: 20px;
+    margin-left: 20px;
 }
 
 /* 突变下拉框 */
@@ -288,7 +280,7 @@ header p {
 }
 
 @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; }
+    .top-card { grid-template-columns: 1fr; }
     .flex-row { flex-direction: column; }
 }
 </style>
@@ -440,7 +432,8 @@ function queryCodon() {
     const dnaTemplate = rnaToDnaTemplate(input);
 
     const synList = getSynonymousCodons(info.aa);
-    const synText = synList.length ? synList.join("，") : input;
+    // 1. 同义密码子用“、”隔开
+    const synText = synList.length ? synList.join("、") : input;
 
     document.getElementById("mRNA_show").innerText = input;
     document.getElementById("aa_show").innerText = aaLabel;
@@ -565,7 +558,10 @@ function updateMutation() {
     if (originalCodon[i] !== mutCodon[i]) diffs.push(i + 1);
   }
   if (diffs.length > 0) {
-    descText += `（变化位置：第 ${diffs.join("，第 ")} 位）`;
+    // 2. 变化位置用“第一位、第二位”并用“、”分隔
+    const posName = {1: "第一位", 2: "第二位", 3: "第三位"};
+    const diffNames = diffs.map(i => posName[i] || `第${i}位`);
+    descText += `（变化位置：${diffNames.join("、")}）`;
   }
 
   typeTag.className = "mut-type " + typeClass;
@@ -594,11 +590,11 @@ window.addEventListener("DOMContentLoaded", () => {
     <p>拼装密码子，查看编码信息，并模拟突变类型</p>
 </header>
 
-<!-- ===== 上部分：左拼装 / 右结果 ===== -->
+<!-- ===== 顶部大卡片：左拼装 / 右结果 ===== -->
 <div class="layout">
-
+  <div class="top-card">
     <!-- 左：拼装密码子 -->
-    <div class="card">
+    <div class="top-left">
         <h2>拼装密码子模拟</h2>
         <p class="hint">选择 A / U / G / C，构建一个 mRNA 三联体密码子（5′→3′）。</p>
 
@@ -609,14 +605,11 @@ window.addEventListener("DOMContentLoaded", () => {
             <button class="base-btn" onclick="addBase('C')">C</button>
         </div>
 
-        <!-- 三个格子 + mRNA 标记 + 查询按钮 -->
         <div class="codon-display">
             <div id="s1" class="codon-slot"></div>
             <div id="s2" class="codon-slot"></div>
             <div id="s3" class="codon-slot"></div>
             <span style="font-size:15px; color:#64748b;">mRNA （5′→3′）</span>
-
-            <!-- 查询按钮左移：去掉 flex:1 占位，只给一点 margin-left -->
             <button class="primary-btn" onclick="queryCodon()" style="margin-left:20px;">查询</button>
         </div>
 
@@ -627,7 +620,7 @@ window.addEventListener("DOMContentLoaded", () => {
     </div>
 
     <!-- 右：查询结果 -->
-    <div class="result-card">
+    <div class="top-right">
         <h2 class="result-title">查询结果</h2>
 
         <div class="result-text">
@@ -655,7 +648,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <span id="synonym_show" class="tag">—</span>
         </div>
     </div>
-
+  </div>
 </div>
 
 <!-- ===== 下方：密码子突变模拟器 ===== -->
@@ -722,6 +715,4 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
-
 
